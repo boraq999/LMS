@@ -21,6 +21,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -49,6 +57,33 @@ const classesData: Class[] = [
   { id: 'CLS-011', name: 'History 4-A', grade: 'Grade 4', teacher: 'Mr. Robert Brown', students: 32, schedule: 'Tue, Fri 10:00' },
 ];
 
+const scheduleData = {
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+  periods: [
+    'Period 1',
+    'Period 2',
+    'Period 3',
+    'Period 4',
+    'Period 5',
+    'Period 6',
+    'Period 7',
+  ],
+  subjects: [
+    'Math', 'Science', 'English', 'History', 'Art', 'P.E.', 'Music', 'Geography', 'Break'
+  ]
+};
+
+const generateDummySchedule = () => {
+  const schedule: { [key: string]: string[] } = {};
+  scheduleData.days.forEach(day => {
+    schedule[day] = Array.from({ length: 7 }, () => 
+      scheduleData.subjects[Math.floor(Math.random() * scheduleData.subjects.length)]
+    );
+  });
+  return schedule;
+};
+
+
 export default function ClassesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
@@ -74,6 +109,8 @@ export default function ClassesPage() {
     }
     return acc;
   }, {} as Record<string, Class[]>);
+
+  const dummySchedule = selectedClass ? generateDummySchedule() : {};
 
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
@@ -154,34 +191,54 @@ export default function ClassesPage() {
 
       {selectedClass && (
         <Dialog open={!!selectedClass} onOpenChange={closeModal}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="max-w-4xl">
             <DialogHeader>
-              <DialogTitle>{selectedClass.name}</DialogTitle>
+              <DialogTitle>Class Details: {selectedClass.name}</DialogTitle>
               <DialogDescription>
-                Details for {selectedClass.grade}.
+                Information and weekly schedule for {selectedClass.grade}.
               </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="flex items-center gap-4">
-                <User className="h-5 w-5 text-muted-foreground" />
-                <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground">Teacher</span>
-                  <span className="font-medium">{selectedClass.teacher}</span>
-                </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div className="space-y-4">
+                 <div className="flex items-center gap-4">
+                    <User className="h-5 w-5 text-muted-foreground" />
+                    <div className="flex flex-col">
+                      <span className="text-sm text-muted-foreground">Teacher</span>
+                      <span className="font-medium">{selectedClass.teacher}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Users className="h-5 w-5 text-muted-foreground" />
+                    <div className="flex flex-col">
+                      <span className="text-sm text-muted-foreground">Enrolled Students</span>
+                      <span className="font-medium">{selectedClass.students}</span>
+                    </div>
+                  </div>
               </div>
-              <div className="flex items-center gap-4">
-                <Calendar className="h-5 w-5 text-muted-foreground" />
-                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground">Schedule</span>
-                  <span className="font-medium">{selectedClass.schedule}</span>
-                </div>
-              </div>
-               <div className="flex items-center gap-4">
-                <Users className="h-5 w-5 text-muted-foreground" />
-                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground">Enrolled Students</span>
-                  <span className="font-medium">{selectedClass.students}</span>
-                </div>
+              <div className="md:col-span-2">
+                 <h4 className="mb-2 font-medium">Weekly Schedule</h4>
+                 <div className="rounded-lg border">
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className="w-[100px]">Period</TableHead>
+                                {scheduleData.days.map(day => <TableHead key={day}>{day}</TableHead>)}
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {scheduleData.periods.map((period, periodIndex) => (
+                                <TableRow key={period}>
+                                    <TableCell className="font-medium">{period}</TableCell>
+                                    {scheduleData.days.map(day => (
+                                        <TableCell key={day}>
+                                            {dummySchedule[day]?.[periodIndex]}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                 </div>
               </div>
             </div>
           </DialogContent>
