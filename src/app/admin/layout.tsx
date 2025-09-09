@@ -65,7 +65,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
 
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-    { href: '#', icon: Users, label: 'Students' },
+    { href: '/admin/students', icon: Users, label: 'Students' },
     { href: '#', icon: Users, label: 'Teachers' },
     { href: '#', icon: BookOpen, label: 'Classes' },
     { href: '#', icon: Calendar, label: 'Calendar' },
@@ -85,7 +85,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname.startsWith(item.href) && item.href !=='#'}
+                    isActive={pathname === item.href}
                   >
                     <Link href={item.href}>
                       <item.icon className="h-4 w-4" />
