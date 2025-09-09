@@ -165,12 +165,8 @@ function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <div className="flex w-full flex-1 flex-col">
-          <AdminHeader />
-          <SidebarInset>{children}</SidebarInset>
-        </div>
-        <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l-0">
-        <SidebarRail/>
+         <Sidebar collapsible="icon" variant="sidebar" side="left" className="border-r">
+          <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
           </SidebarHeader>
@@ -186,7 +182,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
-                    tooltip={{children: item.label, side: "left", align: "center"}}
+                    tooltip={{children: item.label, side: "right", align: "center"}}
                   >
                     <Link href={item.href}>
                       <item.icon className="h-4 w-4" />
@@ -198,6 +194,10 @@ function AdminLayout({ children }: { children: ReactNode }) {
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
+        <div className="flex w-full flex-1 flex-col">
+          <AdminHeader />
+          <SidebarInset>{children}</SidebarInset>
+        </div>
       </div>
     </SidebarProvider>
   );

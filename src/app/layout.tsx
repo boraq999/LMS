@@ -20,12 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang="ar" suppressHydrationWarning>
       <body className={`${tajawal.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
-
-    
