@@ -176,13 +176,13 @@ function AdminLayout({ children }: { children: ReactNode }) {
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu className="px-4">
-              <SidebarMenuItem>
+              <SidebarMenuItem className="items-start">
                  <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
                     الصفحات
                   </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
-                <SidebarMenuItem key={index}>
+                <SidebarMenuItem key={index} className="items-start">
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
