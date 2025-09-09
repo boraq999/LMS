@@ -24,7 +24,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PlusCircle, Search, User, Calendar, BookOpen } from 'lucide-react';
+import { PlusCircle, Search, User, Calendar, BookOpen, Users } from 'lucide-react';
 
 type Class = {
   id: string;
@@ -130,7 +130,7 @@ export default function ClassesPage() {
                           <p className="font-semibold">{cls.name}</p>
                           <Badge variant="secondary">{cls.students} Students</Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{cls.subject}</p>
+                        <p className="text-sm text-muted-foreground">{cls.teacher}</p>
                       </button>
                     ))}
                   </div>
