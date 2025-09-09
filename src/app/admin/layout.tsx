@@ -44,7 +44,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { SheetTitle } from '@/components/ui/sheet';
 
 function AdminHeader() {
   const { user, logout } = useAuth();
@@ -174,7 +173,6 @@ function AdminLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
-          <SheetTitle className="sr-only">Sidebar</SheetTitle>
           <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
