@@ -27,6 +27,7 @@ import {
   ChevronDown,
   Search,
   UserCog,
+  BookCopy,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
@@ -43,6 +44,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { SheetTitle } from '@/components/ui/sheet';
 
 function AdminHeader() {
   const { user, logout } = useAuth();
@@ -56,6 +58,7 @@ function AdminHeader() {
       students: 'الطلاب',
       teachers: 'المعلمون',
       classes: 'الفصول',
+      subjects: 'المواد الدراسية',
       calendar: 'التقويم',
       settings: 'الإعدادات',
     };
@@ -158,6 +161,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
     { href: '/admin/students', icon: Users, label: 'الطلاب' },
     { href: '/admin/teachers', icon: UserCog, label: 'المعلمون' },
     { href: '/admin/classes', icon: BookOpen, label: 'الفصول' },
+    { href: '/admin/subjects', icon: BookCopy, label: 'المواد' },
     { href: '#', icon: Calendar, label: 'التقويم' },
     { href: '#', icon: Settings, label: 'الإعدادات' },
   ];
@@ -170,26 +174,28 @@ function AdminLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
+          <SheetTitle className="sr-only">Sidebar</SheetTitle>
           <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu className="px-4">
-              <SidebarMenuItem>
+              <SidebarMenuItem className='my-4'>
                  <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
                     الصفحات
                   </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
-                <SidebarMenuItem key={index}>
+                <SidebarMenuItem key={index} className='my-1'>
                   <SidebarMenuButton
                     asChild
                     size="lg"
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
+                    className="flex justify-end text-lg"
                   >
-                    <Link href={item.href} className="flex-row-reverse justify-end">
+                    <Link href={item.href} className="flex-row-reverse justify-end gap-4">
                       <span>{item.label}</span>
                       <item.icon className="h-5 w-5" />
                     </Link>
