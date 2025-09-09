@@ -16,12 +16,6 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import {
   Table,
   TableBody,
   TableCell,
@@ -137,21 +131,7 @@ export default function ClassesPage() {
             Manage your school's classes and their schedules.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add Class
-        </Button>
-      </div>
-      
-      <Card className="flex-1">
-        <CardHeader>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <CardTitle>Class List</CardTitle>
-              <CardDescription>
-                Browse classes grouped by grade. Click a class to see details.
-              </CardDescription>
-            </div>
+        <div className="flex items-center gap-4">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -162,48 +142,55 @@ export default function ClassesPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Accordion type="multiple" defaultValue={Object.keys(groupedClasses)}>
-            {Object.entries(groupedClasses).map(([grade, classes]) => (
-              <AccordionItem value={grade} key={grade}>
-                <AccordionTrigger className="text-lg font-medium text-primary">
-                  {grade}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {classes.map(cls => (
-                      <button
-                        key={cls.id}
-                        onClick={() => handleClassClick(cls)}
-                        className="rounded-lg border bg-card p-4 text-left shadow-sm transition-all hover:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring"
-                      >
-                        <div className="flex items-center justify-between">
-                          <p className="font-semibold">{cls.name}</p>
-                          <Badge variant="secondary">{cls.students} Students</Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">{cls.teacher}</p>
-                      </button>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-             {Object.keys(groupedClasses).length === 0 && (
-              <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
-                <BookOpen className="h-12 w-12 text-muted-foreground/50" />
-                <div className="space-y-1">
-                  <h3 className="text-xl font-semibold">No Classes Found</h3>
-                  <p className="text-muted-foreground">
-                    Your search for "{searchTerm}" did not match any classes.
-                  </p>
+          <Button>
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Add Class
+          </Button>
+        </div>
+      </div>
+      
+      <div className="space-y-6">
+          {Object.entries(groupedClasses).map(([grade, classes]) => (
+            <Card key={grade}>
+              <CardHeader>
+                <CardTitle className="text-xl font-semibold text-primary">{grade}</CardTitle>
+                <CardDescription>
+                  List of classes for {grade}. Click a class to see details.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {classes.map(cls => (
+                    <button
+                      key={cls.id}
+                      onClick={() => handleClassClick(cls)}
+                      className="rounded-lg border bg-card p-4 text-left shadow-sm transition-all hover:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring"
+                    >
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">{cls.name}</p>
+                        <Badge variant="secondary">{cls.students} Students</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{cls.teacher}</p>
+                    </button>
+                  ))}
                 </div>
+              </CardContent>
+            </Card>
+          ))}
+            {Object.keys(groupedClasses).length === 0 && (
+            <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+              <div className="rounded-full border border-dashed p-6">
+                <BookOpen className="h-12 w-12 text-muted-foreground/50" />
               </div>
+              <div className="space-y-1">
+                <h3 className="text-xl font-semibold">No Classes Found</h3>
+                <p className="text-muted-foreground max-w-sm">
+                  Your search for "{searchTerm}" did not match any classes. Try a different search term or add a new class.
+                </p>
+              </div>
+            </div>
             )}
-          </Accordion>
-        </CardContent>
-      </Card>
+      </div>
 
       {selectedClass && (
         <Dialog open={!!selectedClass} onOpenChange={closeModal}>
