@@ -70,7 +70,7 @@ function AdminHeader() {
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
 
-      <div className="mr-auto flex items-center gap-4">
+      <div className="ml-auto flex items-center gap-4">
         <div className="relative hidden md:block">
           <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pr-8" />
