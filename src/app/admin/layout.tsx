@@ -143,7 +143,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { href: '/admin/students', icon: Users, label: 'Students' },
-    { href: '#', icon: BookOpen, label: 'Classes' },
+    { href: '/admin/classes', icon: BookOpen, label: 'Classes' },
     { href: '#', icon: Calendar, label: 'Calendar' },
     { href: '#', icon: Settings, label: 'Settings' },
   ];
@@ -180,7 +180,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
-        <div className="flex flex-1 flex-col">
+        <div className="flex w-full flex-1 flex-col">
           <AdminHeader />
           <SidebarInset>{children}</SidebarInset>
         </div>
