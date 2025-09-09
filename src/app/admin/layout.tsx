@@ -150,7 +150,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen w-full">
         <Sidebar collapsible="icon" variant="sidebar" className="border-r-0">
         <SidebarRail/>
           <SidebarHeader className="p-4">
