@@ -185,12 +185,13 @@ function AdminLayout({ children }: { children: ReactNode }) {
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton
                     asChild
+                    size="lg"
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
                   >
                     <Link href={item.href} className="flex-row-reverse justify-end">
                       <span>{item.label}</span>
-                      <item.icon className="h-4 w-4" />
+                      <item.icon className="h-5 w-5" />
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
