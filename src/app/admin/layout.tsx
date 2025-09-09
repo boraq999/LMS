@@ -26,6 +26,7 @@ import {
   LogOut,
   ChevronDown,
   Search,
+  UserCog,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
@@ -146,6 +147,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { href: '/admin/students', icon: Users, label: 'Students' },
+    { href: '/admin/teachers', icon: UserCog, label: 'Teachers' },
     { href: '/admin/classes', icon: BookOpen, label: 'Classes' },
     { href: '#', icon: Calendar, label: 'Calendar' },
     { href: '#', icon: Settings, label: 'Settings' },
