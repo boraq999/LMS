@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { Users, BookOpen, CalendarCheck, TrendingUp, UserCheck, BarChart2 } from 'lucide-react';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="space-y-2">
-        <h1 className="font-headline text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
           Welcome back, {user?.username}! Here's a summary of your school's activities.
         </p>
@@ -112,11 +112,11 @@ export default function AdminDashboard() {
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
               <LineChart data={enrollmentsData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.5)" />
                 <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} fontSize={12} />
                 <YAxis tickLine={false} axisLine={false} tickMargin={8} fontSize={12} domain={['dataMin - 5', 'dataMax + 5']} />
-                <Tooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
-                <Line type="monotone" dataKey="new" stroke="var(--color-new)" strokeWidth={2} dot={{ fill: "var(--color-new)", r: 4 }} activeDot={{ r: 6 }} />
+                <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
+                <Line type="monotone" dataKey="new" stroke="var(--color-new)" strokeWidth={3} dot={{ fill: "var(--color-new)", r: 5 }} activeDot={{ r: 7 }} />
               </LineChart>
             </ChartContainer>
           </CardContent>
@@ -132,10 +132,10 @@ export default function AdminDashboard() {
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
               <BarChart data={attendanceData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.5)" />
                 <XAxis dataKey="name" tickLine={false} axisLine={false} tickMargin={8} fontSize={12} />
                 <YAxis tickLine={false} axisLine={false} tickMargin={8} fontSize={12} domain={[80, 100]} />
-                <Tooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
+                <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
                 <Bar dataKey="attendance" fill="var(--color-attendance)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ChartContainer>

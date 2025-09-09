@@ -47,7 +47,7 @@ export default function StudentsPage() {
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
-          <h1 className="font-headline text-3xl font-bold tracking-tight">Students</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Students</h1>
           <p className="text-muted-foreground">
             Manage your school's students and view their information.
           </p>
@@ -60,19 +60,23 @@ export default function StudentsPage() {
       
       <Card>
         <CardHeader>
-          <CardTitle>Student List</CardTitle>
-          <CardDescription>
-            A comprehensive list of all students currently and previously enrolled.
-          </CardDescription>
-          <div className="relative mt-4">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search students by name, ID, or grade..."
-              className="w-full rounded-lg bg-background pl-8"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <CardTitle>Student List</CardTitle>
+              <CardDescription>
+                A comprehensive list of all students currently and previously enrolled.
+              </CardDescription>
+            </div>
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search students..."
+                className="w-full rounded-lg bg-input pl-8 sm:w-[250px]"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -81,7 +85,7 @@ export default function StudentsPage() {
               <TableRow>
                 <TableHead>Student ID</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead className="hidden sm:table-cell">Grade</TableHead>
+                <TableHead>Grade</TableHead>
                 <TableHead className="hidden md:table-cell">Enrollment Date</TableHead>
                 <TableHead className="text-right">Status</TableHead>
               </TableRow>
@@ -95,7 +99,7 @@ export default function StudentsPage() {
                   <TableCell>
                     <div className="font-medium">{student.name}</div>
                   </TableCell>
-                  <TableCell className="hidden sm:table-cell">{student.grade}</TableCell>
+                  <TableCell>{student.grade}</TableCell>
                   <TableCell className="hidden md:table-cell">{student.enrollmentDate}</TableCell>
                   <TableCell className="text-right">
                     <Badge variant={

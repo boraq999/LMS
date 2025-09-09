@@ -11,10 +11,10 @@ export function Logo({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="flex shrink-0 items-center justify-center rounded-md bg-primary p-2 text-primary-foreground">
+      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary p-2 text-primary-foreground">
         <School className="h-5 w-5" />
       </div>
-      <span className="text-lg font-bold font-headline group-data-[collapsible=icon]:hidden">
+      <span className="text-lg font-bold group-data-[collapsible=icon]:hidden">
         Edumate
       </span>
     </Link>

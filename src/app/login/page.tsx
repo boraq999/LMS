@@ -28,14 +28,14 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-sm shadow-2xl shadow-primary/10">
+      <Card className="w-full max-w-sm border-0 bg-card/80 shadow-2xl shadow-primary/10 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="mb-4 flex justify-center">
             <div className="rounded-full bg-primary p-3 text-primary-foreground">
               <School className="h-8 w-8" />
             </div>
           </div>
-          <CardTitle className="font-headline text-3xl">Edumate</CardTitle>
+          <CardTitle className="text-3xl font-bold">Edumate</CardTitle>
           <CardDescription>
             Welcome! Please enter your username to continue.
           </CardDescription>
@@ -52,6 +52,7 @@ export default function LoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 autoFocus
+                className="bg-input"
               />
             </div>
           </CardContent>
