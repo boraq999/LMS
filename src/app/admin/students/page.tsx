@@ -53,7 +53,7 @@ export default function StudentsPage() {
           </p>
         </div>
         <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
+          <PlusCircle className="ml-2 h-4 w-4" />
           إضافة طالب
         </Button>
       </div>
@@ -68,11 +68,11 @@ export default function StudentsPage() {
               </CardDescription>
             </div>
             <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="ابحث عن الطلاب..."
-                className="w-full rounded-lg bg-input pl-8 sm:w-[250px]"
+                className="w-full rounded-lg bg-input pr-8 sm:w-[250px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -87,7 +87,7 @@ export default function StudentsPage() {
                 <TableHead>الاسم</TableHead>
                 <TableHead>الصف</TableHead>
                 <TableHead className="hidden md:table-cell">تاريخ التسجيل</TableHead>
-                <TableHead className="text-right">الحالة</TableHead>
+                <TableHead className="text-left">الحالة</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -101,7 +101,7 @@ export default function StudentsPage() {
                   </TableCell>
                   <TableCell>{student.grade}</TableCell>
                   <TableCell className="hidden md:table-cell">{student.enrollmentDate}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-left">
                     <Badge variant={
                       student.status === 'نشط' ? 'default' :
                       student.status === 'متخرج' ? 'secondary' :

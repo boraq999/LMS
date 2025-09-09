@@ -42,7 +42,7 @@ export default function LoginPage() {
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
+            <div className="space-y-2 text-right">
               <Label htmlFor="username">اسم المستخدم</Label>
               <Input
                 id="username"
@@ -52,7 +52,7 @@ export default function LoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 autoFocus
-                className="bg-input"
+                className="bg-input text-right"
               />
             </div>
           </CardContent>
@@ -66,5 +66,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-    

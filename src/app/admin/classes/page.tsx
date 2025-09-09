@@ -133,17 +133,17 @@ export default function ClassesPage() {
         </div>
         <div className="flex items-center gap-4">
             <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="ابحث عن الفصول..."
-                className="w-full rounded-lg bg-input pl-8 sm:w-[250px]"
+                className="w-full rounded-lg bg-input pr-8 sm:w-[250px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
+            <PlusCircle className="ml-2 h-4 w-4" />
             إضافة فصل
           </Button>
         </div>
@@ -164,7 +164,7 @@ export default function ClassesPage() {
                     <button
                       key={cls.id}
                       onClick={() => handleClassClick(cls)}
-                      className="rounded-lg border bg-card p-4 text-left shadow-sm transition-all hover:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="rounded-lg border bg-card p-4 text-right shadow-sm transition-all hover:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring"
                     >
                       <div className="flex items-center justify-between">
                         <p className="font-semibold">{cls.name}</p>
@@ -221,7 +221,7 @@ export default function ClassesPage() {
               <div className="md:col-span-2">
                  <h4 className="mb-2 font-medium">الجدول الأسبوعي</h4>
                  <div className="overflow-hidden rounded-lg border">
-                    <Table className="[&_td]:p-2 [&_th]:p-2">
+                    <Table className="[&_td]:p-2 [&_th]:p-2 text-right">
                         <TableHeader>
                             <TableRow className="bg-muted/50">
                                 <TableHead className="w-24 text-center font-bold">الحصة</TableHead>
@@ -250,5 +250,3 @@ export default function ClassesPage() {
     </main>
   );
 }
-
-    

@@ -50,7 +50,7 @@ export default function TeachersPage() {
           </p>
         </div>
         <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
+          <PlusCircle className="ml-2 h-4 w-4" />
           إضافة معلم
         </Button>
       </div>
@@ -65,11 +65,11 @@ export default function TeachersPage() {
               </CardDescription>
             </div>
             <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="ابحث عن المعلمين..."
-                className="w-full rounded-lg bg-input pl-8 sm:w-[250px]"
+                className="w-full rounded-lg bg-input pr-8 sm:w-[250px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -83,7 +83,7 @@ export default function TeachersPage() {
                 <TableHead>الاسم</TableHead>
                 <TableHead className="hidden sm:table-cell">المادة</TableHead>
                 <TableHead className="hidden md:table-cell">التواصل</TableHead>
-                <TableHead className="text-right">الحالة</TableHead>
+                <TableHead className="text-left">الحالة</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -97,16 +97,16 @@ export default function TeachersPage() {
                   <TableCell className="hidden md:table-cell">
                     <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-2">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
                             <span>{teacher.email}</span>
+                            <Mail className="h-4 w-4 text-muted-foreground" />
                         </div>
                          <div className="flex items-center gap-2">
-                            <Phone className="h-4 w-4 text-muted-foreground" />
                             <span>{teacher.phone}</span>
+                            <Phone className="h-4 w-4 text-muted-foreground" />
                         </div>
                     </div>
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-left">
                     <Badge variant={teacher.status === 'نشط' ? 'default' : 'outline'}>
                       {teacher.status}
                     </Badge>
@@ -120,5 +120,3 @@ export default function TeachersPage() {
     </main>
   );
 }
-
-    

@@ -70,10 +70,10 @@ function AdminHeader() {
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
 
-      <div className="ml-auto flex items-center gap-4">
+      <div className="mr-auto flex items-center gap-4">
         <div className="relative hidden md:block">
-          <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pr-8" />
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pl-8" />
         </div>
         
         <ThemeToggle />
@@ -86,6 +86,10 @@ function AdminHeader() {
                 className="h-auto justify-start p-1 text-left"
               >
                 <div className="flex items-center gap-2 overflow-hidden">
+                   <ChevronDown className="hidden h-4 w-4 shrink-0 text-muted-foreground lg:inline" />
+                   <span className="hidden truncate text-sm font-medium lg:inline">
+                    {user.username}
+                  </span>
                   <Avatar className="h-8 w-8">
                     <AvatarImage
                       src={`https://picsum.photos/seed/${user.username}/40/40`}
@@ -96,15 +100,11 @@ function AdminHeader() {
                       {user.username.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="hidden truncate text-sm font-medium lg:inline">
-                    {user.username}
-                  </span>
-                  <ChevronDown className="hidden h-4 w-4 shrink-0 text-muted-foreground lg:inline" />
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="font-normal">
+              <DropdownMenuLabel className="font-normal text-right">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
                     {user.username}
@@ -116,8 +116,8 @@ function AdminHeader() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={logout}>
-                <LogOut className="mr-2 h-4 w-4" />
                 <span>تسجيل الخروج</span>
+                <LogOut className="ml-2 h-4 w-4" />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -143,11 +143,11 @@ function AdminLayout({ children }: { children: ReactNode }) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-background">
         <div className="flex items-center gap-4">
-          <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2">
             <Skeleton className="h-4 w-[200px]" />
             <Skeleton className="h-4 w-[150px]" />
           </div>
+          <Skeleton className="h-12 w-12 rounded-full" />
         </div>
       </div>
     );
@@ -165,7 +165,11 @@ function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-         <Sidebar collapsible="icon" variant="sidebar" side="left" className="border-r">
+        <div className="flex w-full flex-1 flex-col">
+          <AdminHeader />
+          <SidebarInset>{children}</SidebarInset>
+        </div>
+         <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
           <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
@@ -182,11 +186,11 @@ function AdminLayout({ children }: { children: ReactNode }) {
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
-                    tooltip={{children: item.label, side: "right", align: "center"}}
+                    tooltip={{children: item.label, side: "left", align: "center"}}
                   >
-                    <Link href={item.href}>
-                      <item.icon className="h-4 w-4" />
+                    <Link href={item.href} className="flex-row-reverse">
                       <span>{item.label}</span>
+                      <item.icon className="h-4 w-4" />
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -194,10 +198,6 @@ function AdminLayout({ children }: { children: ReactNode }) {
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
-        <div className="flex w-full flex-1 flex-col">
-          <AdminHeader />
-          <SidebarInset>{children}</SidebarInset>
-        </div>
       </div>
     </SidebarProvider>
   );

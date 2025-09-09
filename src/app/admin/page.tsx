@@ -36,7 +36,7 @@ const recentActivities = [
 
 const chartConfig = {
   attendance: {
-    label: 'الحضور (%)',
+    label: 'الحاضرين (%)',
     color: 'hsl(var(--accent))',
   },
   new: {
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
-              <LineChart data={enrollmentsData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+              <LineChart data={enrollmentsData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }} layout="horizontal">
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.5)" />
                 <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} fontSize={12} />
                 <YAxis tickLine={false} axisLine={false} tickMargin={8} fontSize={12} domain={['dataMin - 5', 'dataMax + 5']} />
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
-              <BarChart data={attendanceData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+              <BarChart data={attendanceData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }} layout="horizontal">
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.5)" />
                 <XAxis dataKey="name" tickLine={false} axisLine={false} tickMargin={8} fontSize={12} />
                 <YAxis tickLine={false} axisLine={false} tickMargin={8} fontSize={12} domain={[80, 100]} />
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
                 <TableHead className="hidden sm:table-cell">الفصل</TableHead>
                 <TableHead>النشاط</TableHead>
                 <TableHead className="hidden md:table-cell">التاريخ</TableHead>
-                <TableHead className="text-right">الحالة</TableHead>
+                <TableHead className="text-left">الحالة</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -168,7 +168,7 @@ export default function AdminDashboard() {
                   <TableCell className="hidden sm:table-cell">{activity.class}</TableCell>
                   <TableCell>{activity.activity}</TableCell>
                   <TableCell className="hidden md:table-cell">{activity.date}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-left">
                     <Badge variant={
                       activity.status === 'مكتمل' ? 'default' :
                       activity.status === 'جديد' ? 'secondary' :
@@ -187,5 +187,3 @@ export default function AdminDashboard() {
     </main>
   );
 }
-
-    
