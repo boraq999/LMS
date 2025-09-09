@@ -19,19 +19,19 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PlusCircle, Search } from 'lucide-react';
+import { PlusCircle, Search, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
 
 const studentsData = [
-  { id: 'STU-001', name: 'ليام جونسون', grade: 'الصف 5', status: 'نشط', enrollmentDate: '2023-01-15' },
-  { id: 'STU-002', name: 'أوليفيا سميث', grade: 'الصف 3', status: 'نشط', enrollmentDate: '2023-02-20' },
-  { id: 'STU-003', name: 'نوح ويليامز', grade: 'الصف 8', status: 'متخرج', enrollmentDate: '2020-09-01' },
-  { id: 'STU-004', name: 'إيما براون', grade: 'الصف 5', status: 'معلق', enrollmentDate: '2022-08-10' },
-  { id: 'STU-005', name: 'جيمس جونز', grade: 'الصف 7', status: 'نشط', enrollmentDate: '2021-09-05' },
-  { id: 'STU-006', name: 'صوفيا ديفيس', grade: 'الصف 6', status: 'نشط', enrollmentDate: '2022-09-01' },
-  { id: 'STU-007', name: 'بنجامين ميلر', grade: 'الصف 4', status: 'نشط', enrollmentDate: '2023-09-01' },
-  { id: 'STU-008', name: 'إيزابيلا ويلسون', grade: 'الصف 9', status: 'متخرج', enrollmentDate: '2019-09-01' },
-  { id: 'STU-009', name: 'إيثان مور', grade: 'الصف 2', status: 'نشط', enrollmentDate: '2024-01-20' },
-  { id: 'STU-010', name: 'ميا تايلور', grade: 'الصف 7', status: 'معلق', enrollmentDate: '2021-10-11' },
+  { id: 'STU-001', name: 'ليام جونسون', grade: 'الصف 5', enrollmentDate: '2023-01-15', subscription: { status: 'paid', amountDue: 0 } },
+  { id: 'STU-002', name: 'أوليفيا سميث', grade: 'الصف 3', enrollmentDate: '2023-02-20', subscription: { status: 'unpaid', amountDue: 500 } },
+  { id: 'STU-003', name: 'نوح ويليامز', grade: 'الصف 8', enrollmentDate: '2020-09-01', subscription: { status: 'paid', amountDue: 0 } },
+  { id: 'STU-004', name: 'إيما براون', grade: 'الصف 5', enrollmentDate: '2022-08-10', subscription: { status: 'partial', amountDue: 150 } },
+  { id: 'STU-005', name: 'جيمس جونز', grade: 'الصف 7', enrollmentDate: '2021-09-05', subscription: { status: 'paid', amountDue: 0 } },
+  { id: 'STU-006', name: 'صوفيا ديفيس', grade: 'الصف 6', enrollmentDate: '2022-09-01', subscription: { status: 'paid', amountDue: 0 } },
+  { id: 'STU-007', name: 'بنجامين ميلر', grade: 'الصف 4', enrollmentDate: '2023-09-01', subscription: { status: 'unpaid', amountDue: 500 } },
+  { id: 'STU-008', name: 'إيزابيلا ويلسون', grade: 'الصف 9', enrollmentDate: '2019-09-01', subscription: { status: 'paid', amountDue: 0 } },
+  { id: 'STU-009', name: 'إيثان مور', grade: 'الصف 2', enrollmentDate: '2024-01-20', subscription: { status: 'partial', amountDue: 250 } },
+  { id: 'STU-010', name: 'ميا تايلور', grade: 'الصف 7', enrollmentDate: '2021-10-11', subscription: { status: 'unpaid', amountDue: 500 } },
 ];
 
 export default function StudentsPage() {
@@ -43,6 +43,34 @@ export default function StudentsPage() {
     student.grade.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const getSubscriptionBadge = (subscription: { status: 'paid' | 'unpaid' | 'partial'; amountDue: number }) => {
+    switch (subscription.status) {
+      case 'paid':
+        return (
+          <Badge variant="default" className="bg-green-500 hover:bg-green-600">
+            <CheckCircle2 className="ml-1 h-4 w-4" />
+            مدفوع
+          </Badge>
+        );
+      case 'unpaid':
+        return (
+          <Badge variant="destructive">
+            <XCircle className="ml-1 h-4 w-4" />
+            غير مدفوع
+          </Badge>
+        );
+      case 'partial':
+        return (
+          <Badge variant="secondary" className="bg-yellow-500 text-black hover:bg-yellow-600">
+            <AlertCircle className="ml-1 h-4 w-4" />
+            متبقي: {subscription.amountDue} د.ل
+          </Badge>
+        );
+      default:
+        return <Badge>{subscription.status}</Badge>;
+    }
+  };
+
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between">
@@ -52,7 +80,7 @@ export default function StudentsPage() {
             إدارة طلاب مدرستك وعرض معلوماتهم.
           </p>
         </div>
-        <Button>
+        <Button size="lg">
           <PlusCircle className="ml-2 h-4 w-4" />
           إضافة طالب
         </Button>
@@ -87,7 +115,7 @@ export default function StudentsPage() {
                 <TableHead>الاسم</TableHead>
                 <TableHead>الصف</TableHead>
                 <TableHead className="hidden md:table-cell">تاريخ التسجيل</TableHead>
-                <TableHead className="text-left">الحالة</TableHead>
+                <TableHead className="text-left">حالة الاشتراك</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -102,13 +130,7 @@ export default function StudentsPage() {
                   <TableCell>{student.grade}</TableCell>
                   <TableCell className="hidden md:table-cell">{student.enrollmentDate}</TableCell>
                   <TableCell className="text-left">
-                    <Badge variant={
-                      student.status === 'نشط' ? 'default' :
-                      student.status === 'متخرج' ? 'secondary' :
-                      'destructive'
-                    }>
-                      {student.status}
-                    </Badge>
+                    {getSubscriptionBadge(student.subscription)}
                   </TableCell>
                 </TableRow>
               ))}
