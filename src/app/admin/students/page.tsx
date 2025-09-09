@@ -105,10 +105,8 @@ export default function StudentsPage() {
                     <Badge variant={
                       student.status === 'نشط' ? 'default' :
                       student.status === 'متخرج' ? 'secondary' :
-                      'outline'
-                    }
-                    className={student.status === 'معلق' ? 'border-destructive text-destructive' : ''}
-                    >
+                      'destructive'
+                    }>
                       {student.status}
                     </Badge>
                   </TableCell>
@@ -121,5 +119,3 @@ export default function StudentsPage() {
     </main>
   );
 }
-
-    
