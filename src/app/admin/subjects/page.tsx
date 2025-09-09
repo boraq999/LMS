@@ -85,7 +85,7 @@ export default function SubjectsPage() {
                 <TableHead>رمز المادة</TableHead>
                 <TableHead>اسم المادة</TableHead>
                 <TableHead className="hidden sm:table-cell">المعلم</TableHead>
-                <TableHead className="hidden md:table-cell">القسم</TableHead>
+                <TableHead className="hidden md:table-cell">اسم الفصل</TableHead>
                 <TableHead className="text-left">عدد الفصول</TableHead>
               </TableRow>
             </TableHeader>
