@@ -164,7 +164,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full flex-row-reverse">
         <div className="flex w-full flex-1 flex-col">
           <AdminHeader />
           <SidebarInset>{children}</SidebarInset>
