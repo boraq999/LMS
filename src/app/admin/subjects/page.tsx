@@ -22,15 +22,15 @@ import { Input } from '@/components/ui/input';
 import { PlusCircle, Search, BookCopy } from 'lucide-react';
 
 const subjectsData = [
-  { code: 'MATH101', name: 'الرياضيات', teacher: 'أ. محمد عبدالله', classes: 5, department: 'العلوم' },
-  { code: 'SCI101', name: 'العلوم', teacher: 'أ. فاطمة علي', classes: 4, department: 'العلوم' },
-  { code: 'HIST201', name: 'التاريخ', teacher: 'أ. أحمد خالد', classes: 3, department: 'العلوم الاجتماعية' },
-  { code: 'ENG202', name: 'اللغة الإنجليزية', teacher: 'أ. سارة حسين', classes: 6, department: 'اللغات' },
-  { code: 'ART100', name: 'الفنون', teacher: 'أ. نورة سالم', classes: 2, department: 'الفنون' },
-  { code: 'PE101', name: 'التربية البدنية', teacher: 'أ. علي حسن', classes: 8, department: 'الرياضة' },
-  { code: 'CS301', name: 'علوم الحاسب', teacher: 'د. هند إبراهيم', classes: 3, department: 'التكنولوجيا' },
-  { code: 'ARAB101', name: 'اللغة العربية', teacher: 'أ. خالد القحطاني', classes: 7, department: 'اللغات' },
-  { code: 'GEO201', name: 'الجغرافيا', teacher: 'أ. أحمد خالد', classes: 2, department: 'العلوم الاجتماعية' },
+  { code: 'MATH101', name: 'الرياضيات', teacher: 'أ. محمد عبدالله', classes: 5, department: 'الفصل الدراسي الأول' },
+  { code: 'SCI101', name: 'العلوم', teacher: 'أ. فاطمة علي', classes: 4, department: 'الفصل الدراسي الأول' },
+  { code: 'HIST201', name: 'التاريخ', teacher: 'أ. أحمد خالد', classes: 3, department: 'الفصل الدراسي الثاني' },
+  { code: 'ENG202', name: 'اللغة الإنجليزية', teacher: 'أ. سارة حسين', classes: 6, department: 'الفصل الدراسي الأول' },
+  { code: 'ART100', name: 'الفنون', teacher: 'أ. نورة سالم', classes: 2, department: 'الفصل الدراسي الثاني' },
+  { code: 'PE101', name: 'التربية البدنية', teacher: 'أ. علي حسن', classes: 8, department: 'الفصل الدراسي الأول' },
+  { code: 'CS301', name: 'علوم الحاسب', teacher: 'د. هند إبراهيم', classes: 3, department: 'الفصل الدراسي الثاني' },
+  { code: 'ARAB101', name: 'اللغة العربية', teacher: 'أ. خالد القحطاني', classes: 7, department: 'الفصل الدراسي الأول' },
+  { code: 'GEO201', name: 'الجغرافيا', teacher: 'أ. أحمد خالد', classes: 2, department: 'الفصل الدراسي الثاني' },
 ];
 
 export default function SubjectsPage() {
