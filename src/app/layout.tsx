@@ -1,13 +1,17 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
-import { Inter } from 'next/font/google';
+import { Tajawal } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const tajawal = Tajawal({ 
+  subsets: ['arabic'], 
+  weight: ['400', '500', '700'],
+  variable: '--font-sans' 
+});
 
 export const metadata: Metadata = {
   title: 'Edumate',
-  description: 'A modern interface for school administration.',
+  description: 'واجهة عصرية لإدارة المدارس.',
 };
 
 export default function RootLayout({
@@ -16,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <body className={`${tajawal.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+
+    

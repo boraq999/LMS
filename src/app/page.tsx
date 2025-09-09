@@ -28,9 +28,11 @@ export default function Home() {
         </div>
         <div className="space-y-2 text-center">
             <h1 className="font-headline text-2xl font-bold">Edumate</h1>
-            <p className="text-muted-foreground">Loading your experience...</p>
+            <p className="text-muted-foreground">جاري تحميل تجربتك...</p>
         </div>
       </div>
     </div>
   );
 }
+
+    

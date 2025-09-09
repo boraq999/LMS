@@ -22,13 +22,13 @@ import { Input } from '@/components/ui/input';
 import { PlusCircle, Search, Mail, Phone } from 'lucide-react';
 
 const teachersData = [
-  { id: 'TCH-001', name: 'Mr. John Doe', subject: 'Mathematics', email: 'john.doe@example.com', phone: '123-456-7890', status: 'Active' },
-  { id: 'TCH-002', name: 'Ms. Jane Smith', subject: 'Science', email: 'jane.smith@example.com', phone: '123-456-7891', status: 'Active' },
-  { id: 'TCH-003', name: 'Mr. Robert Brown', subject: 'History', email: 'robert.brown@example.com', phone: '123-456-7892', status: 'Active' },
-  { id: 'TCH-004', name: 'Ms. Emily White', subject: 'English', email: 'emily.white@example.com', phone: '123-456-7893', status: 'On Leave' },
-  { id: 'TCH-005', name: 'Ms. Clara Oswald', subject: 'Art', email: 'clara.oswald@example.com', phone: '123-456-7894', status: 'Active' },
-  { id: 'TCH-006', name: 'Mr. Mike Ross', subject: 'Physical Education', email: 'mike.ross@example.com', phone: '123-456-7895', status: 'Active' },
-  { id: 'TCH-007', name: 'Dr. Amy Pond', subject: 'Computer Science', email: 'amy.pond@example.com', phone: '123-456-7896', status: 'Active' },
+  { id: 'TCH-001', name: 'أ. محمد عبدالله', subject: 'الرياضيات', email: 'john.doe@example.com', phone: '123-456-7890', status: 'نشط' },
+  { id: 'TCH-002', name: 'أ. فاطمة علي', subject: 'العلوم', email: 'jane.smith@example.com', phone: '123-456-7891', status: 'نشط' },
+  { id: 'TCH-003', name: 'أ. أحمد خالد', subject: 'التاريخ', email: 'robert.brown@example.com', phone: '123-456-7892', status: 'نشط' },
+  { id: 'TCH-004', name: 'أ. سارة حسين', subject: 'الإنجليزية', email: 'emily.white@example.com', phone: '123-456-7893', status: 'في إجازة' },
+  { id: 'TCH-005', name: 'أ. نورة سالم', subject: 'الفنون', email: 'clara.oswald@example.com', phone: '123-456-7894', status: 'نشط' },
+  { id: 'TCH-006', name: 'أ. علي حسن', subject: 'التربية البدنية', email: 'mike.ross@example.com', phone: '123-456-7895', status: 'نشط' },
+  { id: 'TCH-007', name: 'د. هند إبراهيم', subject: 'علوم الحاسب', email: 'amy.pond@example.com', phone: '123-456-7896', status: 'نشط' },
 ];
 
 export default function TeachersPage() {
@@ -44,14 +44,14 @@ export default function TeachersPage() {
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">Teachers</h1>
+          <h1 className="text-3xl font-bold tracking-tight">المعلمون</h1>
           <p className="text-muted-foreground">
-            Manage your school's teaching staff.
+            إدارة طاقم التدريس في مدرستك.
           </p>
         </div>
         <Button>
           <PlusCircle className="mr-2 h-4 w-4" />
-          Add Teacher
+          إضافة معلم
         </Button>
       </div>
       
@@ -59,16 +59,16 @@ export default function TeachersPage() {
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <CardTitle>Teacher List</CardTitle>
+              <CardTitle>قائمة المعلمين</CardTitle>
               <CardDescription>
-                A list of all teachers in the institution.
+                قائمة بجميع المعلمين في المؤسسة.
               </CardDescription>
             </div>
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search teachers..."
+                placeholder="ابحث عن المعلمين..."
                 className="w-full rounded-lg bg-input pl-8 sm:w-[250px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -80,10 +80,10 @@ export default function TeachersPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead className="hidden sm:table-cell">Subject</TableHead>
-                <TableHead className="hidden md:table-cell">Contact</TableHead>
-                <TableHead className="text-right">Status</TableHead>
+                <TableHead>الاسم</TableHead>
+                <TableHead className="hidden sm:table-cell">المادة</TableHead>
+                <TableHead className="hidden md:table-cell">التواصل</TableHead>
+                <TableHead className="text-right">الحالة</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -107,7 +107,7 @@ export default function TeachersPage() {
                     </div>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Badge variant={teacher.status === 'Active' ? 'default' : 'outline'}>
+                    <Badge variant={teacher.status === 'نشط' ? 'default' : 'outline'}>
                       {teacher.status}
                     </Badge>
                   </TableCell>
@@ -120,3 +120,5 @@ export default function TeachersPage() {
     </main>
   );
 }
+
+    

@@ -9,38 +9,38 @@ import { Users, BookOpen, CalendarCheck, TrendingUp, UserCheck, BarChart2 } from
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
 const attendanceData = [
-  { name: 'Jan', attendance: 92 },
-  { name: 'Feb', attendance: 95 },
-  { name: 'Mar', attendance: 93 },
-  { name: 'Apr', attendance: 96 },
-  { name: 'May', attendance: 94 },
-  { name: 'Jun', attendance: 97 },
+  { name: 'يناير', attendance: 92 },
+  { name: 'فبراير', attendance: 95 },
+  { name: 'مارس', attendance: 93 },
+  { name: 'أبريل', attendance: 96 },
+  { name: 'مايو', attendance: 94 },
+  { name: 'يونيو', attendance: 97 },
 ];
 
 const enrollmentsData = [
-    { month: 'Jan', new: 24, total: 240 },
-    { month: 'Feb', new: 18, total: 258 },
-    { month: 'Mar', new: 32, total: 290 },
-    { month: 'Apr', new: 27, total: 317 },
-    { month: 'May', new: 42, total: 359 },
-    { month: 'Jun', new: 35, total: 394 },
+    { month: 'يناير', new: 24, total: 240 },
+    { month: 'فبراير', new: 18, total: 258 },
+    { month: 'مارس', new: 32, total: 290 },
+    { month: 'أبريل', new: 27, total: 317 },
+    { month: 'مايو', new: 42, total: 359 },
+    { month: 'يونيو', new: 35, total: 394 },
 ];
 
 const recentActivities = [
-  { name: 'Liam Johnson', class: 'Grade 5', activity: 'Submitted "Science Fair" project', date: '2 hours ago', status: 'Completed' },
-  { name: 'Olivia Smith', class: 'Grade 3', activity: 'New enrollment', date: '1 day ago', status: 'New' },
-  { name: 'Noah Williams', class: 'Grade 8', activity: 'Absent for "Mathematics"', date: '1 day ago', status: 'Absent' },
-  { name: 'Emma Brown', class: 'Grade 5', activity: 'Fee payment overdue', date: '2 days ago', status: 'Overdue' },
-  { name: 'James Jones', class: 'Grade 7', activity: 'Submitted "History Essay"', date: '3 days ago', status: 'Completed' },
+  { name: 'ليام جونسون', class: 'الصف 5', activity: 'قدم مشروع "معرض العلوم"', date: 'منذ ساعتين', status: 'مكتمل' },
+  { name: 'أوليفيا سميث', class: 'الصف 3', activity: 'تسجيل جديد', date: 'منذ يوم', status: 'جديد' },
+  { name: 'نوح ويليامز', class: 'الصف 8', activity: 'غائب عن حصة "الرياضيات"', date: 'منذ يوم', status: 'غائب' },
+  { name: 'إيما براون', class: 'الصف 5', activity: 'رسوم دراسية متأخرة', date: 'منذ يومين', status: 'متأخر' },
+  { name: 'جيمس جونز', class: 'الصف 7', activity: 'قدم "مقال التاريخ"', date: 'منذ 3 أيام', status: 'مكتمل' },
 ];
 
 const chartConfig = {
   attendance: {
-    label: 'Attendance (%)',
+    label: 'الحضور (%)',
     color: 'hsl(var(--accent))',
   },
   new: {
-    label: 'New Enrollments',
+    label: 'التسجيلات الجديدة',
     color: 'hsl(var(--primary))',
   },
 };
@@ -51,51 +51,51 @@ export default function AdminDashboard() {
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">لوحة التحكم</h1>
         <p className="text-muted-foreground">
-          Welcome back, {user?.username}! Here's a summary of your school's activities.
+          أهلاً بعودتك، {user?.username}! إليك ملخص لأنشطة مدرستك.
         </p>
       </div>
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Students</CardTitle>
+            <CardTitle className="text-sm font-medium">إجمالي الطلاب</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">1,254</div>
-            <p className="text-xs text-muted-foreground">+2.5% from last month</p>
+            <p className="text-xs text-muted-foreground">+2.5% من الشهر الماضي</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Teachers</CardTitle>
+            <CardTitle className="text-sm font-medium">المعلمون</CardTitle>
             <UserCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">82</div>
-            <p className="text-xs text-muted-foreground">+1 since last quarter</p>
+            <p className="text-xs text-muted-foreground">+1 منذ الربع الأخير</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Classes</CardTitle>
+            <CardTitle className="text-sm font-medium">الفصول</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">45</div>
-            <p className="text-xs text-muted-foreground">3 new sections added</p>
+            <p className="text-xs text-muted-foreground">تمت إضافة 3 أقسام جديدة</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Attendance Rate</CardTitle>
+            <CardTitle className="text-sm font-medium">معدل الحضور</CardTitle>
             <CalendarCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">96.2%</div>
-            <p className="text-xs text-muted-foreground">+0.5% from yesterday</p>
+            <p className="text-xs text-muted-foreground">+0.5% من الأمس</p>
           </CardContent>
         </Card>
       </div>
@@ -105,9 +105,9 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5"/>
-              New Enrollments
+              التسجيلات الجديدة
             </CardTitle>
-            <CardDescription>Monthly new student enrollments.</CardDescription>
+            <CardDescription>التسجيلات الشهرية للطلاب الجدد.</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
@@ -125,9 +125,9 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BarChart2 className="h-5 w-5"/>
-              Monthly Attendance
+              الحضور الشهري
             </CardTitle>
-            <CardDescription>Average student attendance rate per month.</CardDescription>
+            <CardDescription>متوسط معدل حضور الطلاب شهريًا.</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
@@ -145,18 +145,18 @@ export default function AdminDashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
-          <CardDescription>A log of recent student and administrative activities.</CardDescription>
+          <CardTitle>النشاط الأخير</CardTitle>
+          <CardDescription>سجل بالأنشطة الطلابية والإدارية الأخيرة.</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Student</TableHead>
-                <TableHead className="hidden sm:table-cell">Class</TableHead>
-                <TableHead>Activity</TableHead>
-                <TableHead className="hidden md:table-cell">Date</TableHead>
-                <TableHead className="text-right">Status</TableHead>
+                <TableHead>الطالب</TableHead>
+                <TableHead className="hidden sm:table-cell">الفصل</TableHead>
+                <TableHead>النشاط</TableHead>
+                <TableHead className="hidden md:table-cell">التاريخ</TableHead>
+                <TableHead className="text-right">الحالة</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -170,9 +170,9 @@ export default function AdminDashboard() {
                   <TableCell className="hidden md:table-cell">{activity.date}</TableCell>
                   <TableCell className="text-right">
                     <Badge variant={
-                      activity.status === 'Completed' ? 'default' :
-                      activity.status === 'New' ? 'secondary' :
-                      activity.status === 'Absent' ? 'outline' :
+                      activity.status === 'مكتمل' ? 'default' :
+                      activity.status === 'جديد' ? 'secondary' :
+                      activity.status === 'غائب' ? 'outline' :
                       'destructive'
                     }>
                       {activity.status}
@@ -187,3 +187,5 @@ export default function AdminDashboard() {
     </main>
   );
 }
+
+    

@@ -37,17 +37,17 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-3xl font-bold">Edumate</CardTitle>
           <CardDescription>
-            Welcome! Please enter your username to continue.
+            أهلاً بك! الرجاء إدخال اسم المستخدم للمتابعة.
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username">اسم المستخدم</Label>
               <Input
                 id="username"
                 type="text"
-                placeholder="e.g., admin"
+                placeholder="مثال: admin"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -58,7 +58,7 @@ export default function LoginPage() {
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full">
-              Sign In
+              تسجيل الدخول
             </Button>
           </CardFooter>
         </form>
@@ -66,3 +66,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+    

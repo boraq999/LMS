@@ -49,22 +49,31 @@ function AdminHeader() {
   const pathname = usePathname();
   const getPageTitle = () => {
     const segment = pathname.split('/').pop();
-    if (segment === 'admin') return 'Dashboard';
-    return segment ? segment.charAt(0).toUpperCase() + segment.slice(1) : 'Dashboard';
+    if (!segment || segment === 'admin') return 'لوحة التحكم';
+
+    const titles: { [key: string]: string } = {
+      dashboard: 'لوحة التحكم',
+      students: 'الطلاب',
+      teachers: 'المعلمون',
+      classes: 'الفصول',
+      calendar: 'التقويم',
+      settings: 'الإعدادات',
+    };
+    return titles[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
   };
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
       <div className="flex items-center gap-2">
         <SidebarTrigger className="md:hidden" />
-        <span className="hidden text-sm text-muted-foreground md:inline">/ Dashboards /</span>
+        <span className="hidden text-sm text-muted-foreground md:inline">/ لوحات التحكم /</span>
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
 
       <div className="ml-auto flex items-center gap-4">
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Type here..." className="h-9 w-48 rounded-full bg-input pl-8" />
+          <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pl-8" />
         </div>
         
         <ThemeToggle />
@@ -101,14 +110,14 @@ function AdminHeader() {
                     {user.username}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    Administrator
+                    مسؤول
                   </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={logout}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>تسجيل الخروج</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -145,12 +154,12 @@ function AdminLayout({ children }: { children: ReactNode }) {
   }
 
   const navItems = [
-    { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-    { href: '/admin/students', icon: Users, label: 'Students' },
-    { href: '/admin/teachers', icon: UserCog, label: 'Teachers' },
-    { href: '/admin/classes', icon: BookOpen, label: 'Classes' },
-    { href: '#', icon: Calendar, label: 'Calendar' },
-    { href: '#', icon: Settings, label: 'Settings' },
+    { href: '/admin', icon: LayoutDashboard, label: 'لوحة التحكم' },
+    { href: '/admin/students', icon: Users, label: 'الطلاب' },
+    { href: '/admin/teachers', icon: UserCog, label: 'المعلمون' },
+    { href: '/admin/classes', icon: BookOpen, label: 'الفصول' },
+    { href: '#', icon: Calendar, label: 'التقويم' },
+    { href: '#', icon: Settings, label: 'الإعدادات' },
   ];
 
   return (
@@ -165,7 +174,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
             <SidebarMenu className="px-4">
               <SidebarMenuItem>
                  <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
-                    PAGES
+                    الصفحات
                   </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
@@ -195,3 +204,5 @@ function AdminLayout({ children }: { children: ReactNode }) {
 }
 
 export default AdminLayout;
+
+    
