@@ -188,7 +188,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
                   >
-                    <Link href={item.href} className="flex-row-reverse justify-start">
+                    <Link href={item.href} className="flex-row-reverse justify-end">
                       <span>{item.label}</span>
                       <item.icon className="h-4 w-4" />
                     </Link>
