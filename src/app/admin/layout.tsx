@@ -41,6 +41,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function AdminHeader() {
   const { user, logout } = useAuth();
@@ -64,6 +65,8 @@ function AdminHeader() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input placeholder="Type here..." className="h-9 w-48 rounded-full bg-input pl-8" />
         </div>
+        
+        <ThemeToggle />
 
         {user && (
           <DropdownMenu>
