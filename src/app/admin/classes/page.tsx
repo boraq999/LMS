@@ -32,7 +32,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PlusCircle, Search, User, Calendar, BookOpen, Users } from 'lucide-react';
+import { PlusCircle, Search, User, BookOpen, Users } from 'lucide-react';
 
 type Class = {
   id: string;
@@ -83,6 +83,22 @@ const generateDummySchedule = () => {
   return schedule;
 };
 
+const getSubjectBadge = (subject: string) => {
+  const commonProps = "w-full text-center justify-center text-xs py-1";
+  switch (subject) {
+    case 'Math': return <Badge variant="default" className={`${commonProps} bg-blue-500/80 hover:bg-blue-500`}>{subject}</Badge>;
+    case 'Science': return <Badge variant="default" className={`${commonProps} bg-green-500/80 hover:bg-green-500`}>{subject}</Badge>;
+    case 'English': return <Badge variant="default" className={`${commonProps} bg-red-500/80 hover:bg-red-500`}>{subject}</Badge>;
+    case 'History': return <Badge variant="default" className={`${commonProps} bg-yellow-500/80 hover:bg-yellow-500 text-black`}>{subject}</Badge>;
+    case 'Art': return <Badge variant="default" className={`${commonProps} bg-purple-500/80 hover:bg-purple-500`}>{subject}</Badge>;
+    case 'P.E.': return <Badge variant="default" className={`${commonProps} bg-orange-500/80 hover:bg-orange-500`}>{subject}</Badge>;
+    case 'Music': return <Badge variant="default" className={`${commonProps} bg-pink-500/80 hover:bg-pink-500`}>{subject}</Badge>;
+    case 'Geography': return <Badge variant="default" className={`${commonProps} bg-teal-500/80 hover:bg-teal-500`}>{subject}</Badge>;
+    case 'Break': return <Badge variant="secondary" className={`${commonProps}`}>{subject}</Badge>;
+    default: return <Badge variant="outline" className={commonProps}>{subject}</Badge>;
+  }
+};
+
 
 export default function ClassesPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -113,7 +129,7 @@ export default function ClassesPage() {
   const dummySchedule = selectedClass ? generateDummySchedule() : {};
 
   return (
-    <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
+    <main className="flex flex-1 flex-col space-y-6 p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">Classes</h1>
@@ -127,7 +143,7 @@ export default function ClassesPage() {
         </Button>
       </div>
       
-      <Card>
+      <Card className="flex-1">
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -217,21 +233,21 @@ export default function ClassesPage() {
               </div>
               <div className="md:col-span-2">
                  <h4 className="mb-2 font-medium">Weekly Schedule</h4>
-                 <div className="rounded-lg border">
-                    <Table>
+                 <div className="overflow-hidden rounded-lg border">
+                    <Table className="[&_td]:p-2 [&_th]:p-2">
                         <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[100px]">Period</TableHead>
-                                {scheduleData.days.map(day => <TableHead key={day}>{day}</TableHead>)}
+                            <TableRow className="bg-muted/50">
+                                <TableHead className="w-24 text-center font-bold">Period</TableHead>
+                                {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {scheduleData.periods.map((period, periodIndex) => (
                                 <TableRow key={period}>
-                                    <TableCell className="font-medium">{period}</TableCell>
+                                    <TableCell className="text-center font-medium">{period}</TableCell>
                                     {scheduleData.days.map(day => (
-                                        <TableCell key={day}>
-                                            {dummySchedule[day]?.[periodIndex]}
+                                        <TableCell key={day} className="text-center">
+                                            {getSubjectBadge(dummySchedule[day]?.[periodIndex])}
                                         </TableCell>
                                     ))}
                                 </TableRow>
