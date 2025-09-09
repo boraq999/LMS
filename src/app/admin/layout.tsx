@@ -70,10 +70,10 @@ function AdminHeader() {
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
 
-      <div className="ml-auto flex items-center gap-4">
+      <div className="mr-auto flex items-center gap-4">
         <div className="relative hidden md:block">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pl-8" />
+          <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="اكتب هنا..." className="h-9 w-48 rounded-full bg-input pr-8" />
         </div>
         
         <ThemeToggle />
@@ -165,7 +165,11 @@ function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <Sidebar collapsible="icon" variant="sidebar" className="border-r-0">
+        <div className="flex w-full flex-1 flex-col">
+          <AdminHeader />
+          <SidebarInset>{children}</SidebarInset>
+        </div>
+        <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l-0">
         <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
@@ -182,7 +186,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
-                    tooltip={{children: item.label, side: "right", align: "center"}}
+                    tooltip={{children: item.label, side: "left", align: "center"}}
                   >
                     <Link href={item.href}>
                       <item.icon className="h-4 w-4" />
@@ -194,15 +198,9 @@ function AdminLayout({ children }: { children: ReactNode }) {
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
-        <div className="flex w-full flex-1 flex-col">
-          <AdminHeader />
-          <SidebarInset>{children}</SidebarInset>
-        </div>
       </div>
     </SidebarProvider>
   );
 }
 
 export default AdminLayout;
-
-    
