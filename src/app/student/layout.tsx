@@ -190,7 +190,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
                     className="flex justify-end text-lg"
                   >
                     <Link href={item.href} className="flex-row-reverse justify-end gap-4">
-                      <span>{item.label}</span>
+                      <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       <item.icon className="h-5 w-5" />
                     </Link>
                   </SidebarMenuButton>
@@ -206,7 +206,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
                     size="lg"
                     tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
                     className="flex w-full flex-row-reverse justify-end text-lg">
-                      <span>تسجيل الخروج</span>
+                      <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
                       <LogOut className="h-5 w-5" />
                   </SidebarMenuButton>
                 </SidebarMenuItem>

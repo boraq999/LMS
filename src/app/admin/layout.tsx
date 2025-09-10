@@ -192,7 +192,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                     className="flex justify-end text-lg"
                   >
                     <Link href={item.href} className="flex-row-reverse justify-end gap-4">
-                      <span>{item.label}</span>
+                      <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       <item.icon className="h-5 w-5" />
                     </Link>
                   </SidebarMenuButton>
