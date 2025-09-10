@@ -13,7 +13,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarInset,
   SidebarTrigger,
   SidebarSeparator,
 } from '@/components/ui/sidebar';
@@ -160,10 +159,10 @@ export function AppShell({
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full flex-row-reverse">
-        <div className="flex w-full flex-1 flex-col">
+        <main className="flex w-full flex-1 flex-col">
           <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} />
-          <SidebarInset>{children}</SidebarInset>
-        </div>
+          {children}
+        </main>
         <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
             <Logo />
