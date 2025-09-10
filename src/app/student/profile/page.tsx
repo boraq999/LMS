@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Upload, HeartPulse } from 'lucide-react';
+import Image from 'next/image';
 
 export default function StudentProfilePage() {
   const { user } = useAuth();
@@ -45,39 +46,48 @@ export default function StudentProfilePage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>الصورة الشخصية</CardTitle>
-          <CardDescription>
-            يمكنك تحديث صورتك الشخصية هنا.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center gap-6 sm:flex-row">
-            <Avatar className="h-24 w-24">
-              <AvatarImage
-                src={`https://picsum.photos/seed/${user?.username}/100/100`}
-                alt={user?.username}
-                data-ai-hint="profile picture"
-              />
-              <AvatarFallback>
-                {user?.username.charAt(0).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col gap-2">
-               <Button asChild>
-                <label htmlFor="picture-upload" className="cursor-pointer">
-                    <Upload className="ml-2 h-4 w-4" />
-                    تغيير الصورة
-                </label>
-               </Button>
-               <input id="picture-upload" type="file" className="hidden" />
-               <p className="text-xs text-muted-foreground">
-                JPG أو PNG أو GIF، بحد أقصى 5 ميجابايت.
-               </p>
+       <Card className="relative overflow-hidden">
+        <Image
+          src="https://picsum.photos/seed/profile-bg/1200/300"
+          alt="Profile background"
+          data-ai-hint="header background"
+          fill
+          className="object-cover opacity-20"
+        />
+        <div className="relative">
+            <CardHeader>
+            <CardTitle>الصورة الشخصية</CardTitle>
+            <CardDescription>
+                يمكنك تحديث صورتك الشخصية هنا.
+            </CardDescription>
+            </CardHeader>
+            <CardContent>
+            <div className="flex flex-col items-center gap-6 sm:flex-row">
+                <Avatar className="h-24 w-24 border-4 border-background">
+                <AvatarImage
+                    src={`https://picsum.photos/seed/${user?.username}/100/100`}
+                    alt={user?.username}
+                    data-ai-hint="profile picture"
+                />
+                <AvatarFallback>
+                    {user?.username.charAt(0).toUpperCase()}
+                </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col gap-2">
+                <Button asChild>
+                    <label htmlFor="picture-upload" className="cursor-pointer">
+                        <Upload className="ml-2 h-4 w-4" />
+                        تغيير الصورة
+                    </label>
+                </Button>
+                <input id="picture-upload" type="file" className="hidden" />
+                <p className="text-xs text-muted-foreground">
+                    JPG أو PNG أو GIF، بحد أقصى 5 ميجابايت.
+                </p>
+                </div>
             </div>
-          </div>
-        </CardContent>
+            </CardContent>
+        </div>
       </Card>
       
       <Card>
