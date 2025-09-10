@@ -57,6 +57,7 @@ function StudentHeader() {
       subjects: 'المواد الدراسية',
       grades: 'الدرجات',
       schedule: 'الجدول الدراسي',
+      homework: 'الواجبات',
       profile: 'الملف الشخصي',
     };
     return titles[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
@@ -158,7 +159,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
     { href: '/student/subjects', icon: BookOpen, label: 'المواد الدراسية' },
     { href: '/student/grades', icon: GraduationCap, label: 'الدرجات' },
     { href: '/student/schedule', icon: Calendar, label: 'الجدول الدراسي' },
-    { href: '#', icon: ClipboardList, label: 'الواجبات' },
+    { href: '/student/homework', icon: ClipboardList, label: 'الواجبات' },
     { href: '#', icon: User, label: 'الملف الشخصي' },
   ];
 
@@ -206,7 +207,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
                     onClick={logout}
                     size="lg"
                     tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
-                    className="flex w-full flex-row-reverse justify-start text-lg">
+                    className="flex w-full flex-row-reverse justify-end text-lg">
                       <span>تسجيل الخروج</span>
                       <LogOut className="h-5 w-5" />
                   </SidebarMenuButton>
