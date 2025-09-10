@@ -43,16 +43,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));
     if (role === 'student') {
-        router.push('/student');
+        router.replace('/student');
     } else {
-        router.push('/admin');
+        router.replace('/admin');
     }
   }, [router]);
 
   const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem('edumate-user');
-    router.push('/login');
+    router.replace('/login');
   }, [router]);
   
   // Redirect if user is logged in and tries to access /login
