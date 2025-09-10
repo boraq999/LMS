@@ -156,7 +156,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
   const navItems = [
     { href: '/student', icon: LayoutDashboard, label: 'لوحة التحكم' },
     { href: '/student/subjects', icon: BookOpen, label: 'المواد الدراسية' },
-    { href: '#', icon: GraduationCap, label: 'الدرجات' },
+    { href: '/student/grades', icon: GraduationCap, label: 'الدرجات' },
     { href: '#', icon: Calendar, label: 'الجدول الدراسي' },
     { href: '#', icon: ClipboardList, label: 'الواجبات' },
     { href: '#', icon: User, label: 'الملف الشخصي' },
