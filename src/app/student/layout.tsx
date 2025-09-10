@@ -170,7 +170,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
-          <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center">
+          <SidebarHeader className="p-4 group-data-[collapsible=icon]:justify-center">
             <Logo />
           </SidebarHeader>
           <SidebarContent>
@@ -187,7 +187,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
                     size="lg"
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
-                    className="flex justify-end text-lg"
+                    className="flex justify-end group-data-[collapsible=icon]:justify-center text-lg"
                   >
                     <Link href={item.href} className="flex-row-reverse justify-end gap-4">
                       <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
@@ -205,7 +205,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
                     onClick={logout}
                     size="lg"
                     tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
-                    className="flex w-full flex-row-reverse justify-end text-lg">
+                    className="flex w-full flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center text-lg">
                       <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
                       <LogOut className="h-5 w-5" />
                   </SidebarMenuButton>

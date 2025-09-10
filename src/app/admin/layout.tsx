@@ -172,7 +172,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
-          <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center">
+          <SidebarHeader className="p-4 group-data-[collapsible=icon]:justify-center">
             <Logo />
           </SidebarHeader>
           <SidebarContent>
@@ -189,7 +189,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
                     size="lg"
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
-                    className="flex justify-end text-lg"
+                    className="flex justify-end group-data-[collapsible=icon]:justify-center text-lg"
                   >
                     <Link href={item.href} className="flex-row-reverse justify-end gap-4">
                       <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
