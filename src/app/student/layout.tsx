@@ -66,7 +66,7 @@ function StudentHeader() {
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
       <div className="flex items-center gap-2">
-        <SidebarTrigger className="md:hidden" />
+        <SidebarTrigger />
         <span className="hidden text-sm text-muted-foreground md:inline">/ لوحات التحكم /</span>
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
