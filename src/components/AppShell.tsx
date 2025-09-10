@@ -46,7 +46,7 @@ type NavItem = {
 type AppShellProps = {
   children: ReactNode;
   navItems: NavItem[];
-  userRole: 'admin' | 'student';
+  userRole: 'admin' | 'student' | 'teacher';
   pageTitles: { [key: string]: string };
   defaultTitle: string;
 };
@@ -62,12 +62,23 @@ function AppHeader({
   const pathname = usePathname();
 
   const getPageTitle = () => {
-    const segment = pathname.split('/').pop() || '';
-    if (!segment || segment === 'admin' || segment === 'student') return defaultTitle;
-    return pageTitles[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+    const segments = pathname.split('/').filter(Boolean);
+    const lastSegment = segments[segments.length - 1] || '';
+    if (!lastSegment || ['admin', 'student', 'teacher'].includes(lastSegment)) {
+      return defaultTitle;
+    }
+    return pageTitles[lastSegment] || lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
   };
-
-  const roleName = user?.role === 'admin' ? 'مسؤول' : 'طالب';
+  
+  const getRoleName = () => {
+    if (!user) return '';
+    switch (user.role) {
+      case 'admin': return 'مسؤول';
+      case 'student': return 'طالب';
+      case 'teacher': return 'معلم';
+      default: return '';
+    }
+  };
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
@@ -119,7 +130,7 @@ function AppHeader({
                     {user.username}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {roleName}
+                    {getRoleName()}
                   </p>
                 </div>
               </DropdownMenuLabel>
@@ -188,22 +199,20 @@ export function AppShell({
               ))}
             </SidebarMenu>
           </SidebarContent>
-          {userRole === 'student' && (
-             <SidebarFooter className="p-4">
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      onClick={logout}
-                      size="lg"
-                      tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
-                      className="flex w-full flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center text-lg">
-                        <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
-                        <LogOut className="h-5 w-5" />
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-             </SidebarFooter>
-          )}
+          <SidebarFooter className="p-4">
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    onClick={logout}
+                    size="lg"
+                    tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
+                    className="flex w-full flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center text-lg">
+                      <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
+                      <LogOut className="h-5 w-5" />
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+           </SidebarFooter>
         </Sidebar>
       </div>
     </SidebarProvider>

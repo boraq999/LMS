@@ -6,13 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 interface User {
   username: string;
-  role: 'admin' | 'student';
+  role: 'admin' | 'student' | 'teacher';
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (username: string, role: 'admin' | 'student') => void;
+  login: (username: string, role: 'admin' | 'student' | 'teacher') => void;
   logout: () => void;
 }
 
@@ -38,12 +38,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = useCallback((username: string, role: 'admin' | 'student') => {
+  const login = useCallback((username: string, role: 'admin' | 'student' | 'teacher') => {
     const newUser: User = { username, role };
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));
     if (role === 'student') {
         router.replace('/student');
+    } else if (role === 'teacher') {
+        router.replace('/teacher');
     } else {
         router.replace('/admin');
     }
@@ -60,7 +62,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!loading && user && pathname === '/login') {
        if (user.role === 'student') {
         router.replace('/student');
-      } else {
+      } else if (user.role === 'teacher') {
+        router.replace('/teacher');
+       } else {
         router.replace('/admin');
       }
     }
