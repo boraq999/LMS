@@ -5,11 +5,11 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, UserCircle } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const subjectsData = [
   { name: 'الرياضيات', teacher: 'أ. محمد عبدالله', grade: 92 },
@@ -72,25 +72,3 @@ export default function StudentSubjectsPage() {
     </main>
   );
 }
-
-// Custom Progress component to allow changing indicator color
-const CustomProgress = ({
-  value,
-  className,
-  indicatorClassName,
-}: {
-  value: number;
-  className?: string;
-  indicatorClassName?: string;
-}) => {
-  return (
-    <div
-      className={cn('relative h-4 w-full overflow-hidden rounded-full bg-secondary', className)}
-    >
-      <div
-        className={cn('h-full w-full flex-1 bg-primary transition-all', indicatorClassName)}
-        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-      />
-    </div>
-  );
-};
