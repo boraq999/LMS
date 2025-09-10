@@ -15,6 +15,7 @@ import {
   SidebarFooter,
   SidebarTrigger,
   SidebarSeparator,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import {
   ChevronDown,
@@ -35,6 +36,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { cn } from '@/lib/utils';
 
 type NavItem = {
   href: string;
@@ -146,6 +148,24 @@ function AppHeader({
   );
 }
 
+
+function MainContent({ children }: { children: ReactNode }) {
+  const { isMobile, state } = useSidebar();
+  
+  return (
+    <main
+      className={cn(
+        'flex w-full flex-1 flex-col transition-[padding] duration-200 ease-linear',
+        !isMobile && state === 'expanded' && 'md:pr-[var(--sidebar-width)]',
+        !isMobile && state === 'collapsed' && 'md:pr-[var(--sidebar-width-icon)]'
+      )}
+    >
+      {children}
+    </main>
+  );
+}
+
+
 export function AppShell({
   children,
   navItems,
@@ -159,10 +179,6 @@ export function AppShell({
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full flex-row-reverse">
-        <main className="flex w-full flex-1 flex-col">
-          <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} />
-          {children}
-        </main>
         <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
             <Logo />
@@ -213,6 +229,10 @@ export function AppShell({
               </SidebarMenu>
            </SidebarFooter>
         </Sidebar>
+         <MainContent>
+            <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} />
+            {children}
+        </MainContent>
       </div>
     </SidebarProvider>
   );
