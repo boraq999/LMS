@@ -12,7 +12,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (username: string) => void;
+  login: (username: string, role: 'admin' | 'student') => void;
   logout: () => void;
 }
 
@@ -38,8 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = useCallback((username: string) => {
-    const role = username.toLowerCase() === 'student' ? 'student' : 'admin';
+  const login = useCallback((username: string, role: 'admin' | 'student') => {
     const newUser: User = { username, role };
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));

@@ -13,16 +13,18 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { School } from 'lucide-react';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { School, UserCog, GraduationCap } from 'lucide-react';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
+  const [role, setRole] = useState<'admin' | 'student'>('admin');
   const { login } = useAuth();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (username.trim()) {
-      login(username.trim());
+      login(username.trim(), role);
     }
   };
 
@@ -37,17 +39,51 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-3xl font-bold">Edumate</CardTitle>
           <CardDescription>
-            أهلاً بك! الرجاء إدخال اسم المستخدم للمتابعة.
+            أهلاً بك! الرجاء اختيار دورك وإدخال اسم المستخدم.
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
+            <div className="space-y-3 text-right">
+              <Label>اختر دورك</Label>
+              <RadioGroup
+                defaultValue="admin"
+                className="grid grid-cols-2 gap-4"
+                value={role}
+                onValueChange={(value: 'admin' | 'student') => setRole(value)}
+              >
+                <div>
+                  <RadioGroupItem value="admin" id="admin" className="peer sr-only" />
+                  <Label
+                    htmlFor="admin"
+                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                  >
+                    <UserCog className="mb-3 h-6 w-6" />
+                    مسؤول
+                  </Label>
+                </div>
+                <div>
+                  <RadioGroupItem
+                    value="student"
+                    id="student"
+                    className="peer sr-only"
+                  />
+                  <Label
+                    htmlFor="student"
+                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                  >
+                    <GraduationCap className="mb-3 h-6 w-6" />
+                    طالب
+                  </Label>
+                </div>
+              </RadioGroup>
+            </div>
             <div className="space-y-2 text-right">
               <Label htmlFor="username">اسم المستخدم</Label>
               <Input
                 id="username"
                 type="text"
-                placeholder="مثال: admin"
+                placeholder={role === 'admin' ? 'مثال: admin' : 'مثال: student'}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
