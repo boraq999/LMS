@@ -52,7 +52,7 @@ export default function StudentProfilePage() {
           alt="Profile background"
           data-ai-hint="header background"
           fill
-          className="object-cover opacity-20"
+          className="object-cover object-center opacity-20"
         />
         <div className="relative">
             <CardHeader>
