@@ -9,39 +9,36 @@ import {
   Users,
   BookOpen,
   Calendar,
-  Settings,
-  UserCog,
-  BookCopy,
+  ClipboardCheck,
+  User,
 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
 
 const navItems = [
-  { href: '/admin', icon: LayoutDashboard, label: 'لوحة التحكم' },
-  { href: '/admin/students', icon: Users, label: 'الطلاب' },
-  { href: '/admin/teachers', icon: UserCog, label: 'المعلمون' },
-  { href: '/admin/classes', icon: BookOpen, label: 'الفصول' },
-  { href: '/admin/subjects', icon: BookCopy, label: 'المواد' },
-  { href: '#', icon: Calendar, label: 'التقويم' },
-  { href: '#', icon: Settings, label: 'الإعدادات' },
+  { href: '/teacher', icon: LayoutDashboard, label: 'لوحة التحكم' },
+  { href: '/teacher/classes', icon: BookOpen, label: 'فصولي' },
+  { href: '/teacher/students', icon: Users, label: 'طلابي' },
+  { href: '/teacher/assignments', icon: ClipboardCheck, label: 'الواجبات' },
+  { href: '/teacher/schedule', icon: Calendar, label: 'الجدول الدراسي' },
+  { href: '/teacher/profile', icon: User, label: 'الملف الشخصي' },
 ];
 
 const pageTitles = {
   dashboard: 'لوحة التحكم',
-  students: 'الطلاب',
-  teachers: 'المعلمون',
-  classes: 'الفصول',
-  subjects: 'المواد الدراسية',
-  calendar: 'التقويم',
-  settings: 'الإعدادات',
+  classes: 'فصولي',
+  students: 'طلابي',
+  assignments: 'الواجبات',
+  schedule: 'الجدول الدراسي',
+  profile: 'الملف الشخصي',
 };
 
-function AdminLayout({ children }: { children: ReactNode }) {
+function TeacherLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && (!user || user.role !== 'admin')) {
+    if (!loading && (!user || user.role !== 'teacher')) {
       router.replace('/login');
     }
   }, [user, loading, router]);
@@ -63,13 +60,13 @@ function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <AppShell
       navItems={navItems}
-      userRole="admin"
+      userRole="teacher"
       pageTitles={pageTitles}
-      defaultTitle="لوحة التحكم"
+      defaultTitle="لوحة تحكم المعلم"
     >
       {children}
     </AppShell>
   );
 }
 
-export default AdminLayout;
+export default TeacherLayout;
