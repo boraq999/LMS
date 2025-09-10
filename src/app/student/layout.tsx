@@ -54,6 +54,7 @@ function StudentHeader() {
     const titles: { [key: string]: string } = {
       dashboard: 'لوحة التحكم',
       courses: 'المواد الدراسية',
+      subjects: 'المواد الدراسية',
       grades: 'الدرجات',
       schedule: 'الجدول الدراسي',
       profile: 'الملف الشخصي',
@@ -154,7 +155,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
 
   const navItems = [
     { href: '/student', icon: LayoutDashboard, label: 'لوحة التحكم' },
-    { href: '#', icon: BookOpen, label: 'المواد الدراسية' },
+    { href: '/student/subjects', icon: BookOpen, label: 'المواد الدراسية' },
     { href: '#', icon: GraduationCap, label: 'الدرجات' },
     { href: '#', icon: Calendar, label: 'الجدول الدراسي' },
     { href: '#', icon: ClipboardList, label: 'الواجبات' },
