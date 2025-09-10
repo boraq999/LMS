@@ -13,8 +13,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Upload } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Upload, HeartPulse } from 'lucide-react';
 
 export default function StudentProfilePage() {
   const { user } = useAuth();
@@ -28,6 +28,12 @@ export default function StudentProfilePage() {
     address: '123 الشارع الرئيسي، طرابلس، ليبيا',
     parentName: 'أحمد',
     parentPhone: '091-234-5678',
+    healthInfo: {
+        bloodType: 'A+',
+        allergies: 'لا يوجد',
+        chronicDiseases: 'لا يوجد',
+        healthStatus: 'جيدة'
+    }
   };
 
   return (
@@ -109,6 +115,43 @@ export default function StudentProfilePage() {
         </CardContent>
         <CardFooter className="border-t px-6 py-4">
             <Button>حفظ التغييرات</Button>
+        </CardFooter>
+      </Card>
+
+      <Card>
+        <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+                <HeartPulse className="h-5 w-5 text-primary"/>
+                المعلومات الصحية
+            </CardTitle>
+            <CardDescription>
+                تفاصيل صحية هامة عن الطالب. هذه المعلومات سرية.
+            </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                 <div className="space-y-2">
+                    <Label htmlFor="bloodType">فصيلة الدم</Label>
+                    <Input id="bloodType" defaultValue={studentData.healthInfo.bloodType} />
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="healthStatus">الحالة الصحية</Label>
+                    <Input id="healthStatus" defaultValue={studentData.healthInfo.healthStatus} />
+                </div>
+            </div>
+             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                    <Label htmlFor="allergies">الحساسية</Label>
+                    <Textarea id="allergies" placeholder="اذكر أي حساسية يعاني منها الطالب..." defaultValue={studentData.healthInfo.allergies} />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="chronicDiseases">الأمراض المزمنة</Label>
+                    <Textarea id="chronicDiseases" placeholder="اذكر أي أمراض مزمنة..." defaultValue={studentData.healthInfo.chronicDiseases} />
+                </div>
+            </div>
+        </CardContent>
+         <CardFooter className="border-t px-6 py-4">
+            <Button>حفظ المعلومات الصحية</Button>
         </CardFooter>
       </Card>
 
