@@ -160,7 +160,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
     { href: '/student/grades', icon: GraduationCap, label: 'الدرجات' },
     { href: '/student/schedule', icon: Calendar, label: 'الجدول الدراسي' },
     { href: '/student/homework', icon: ClipboardList, label: 'الواجبات' },
-    { href: '#', icon: User, label: 'الملف الشخصي' },
+    { href: '/student/profile', icon: User, label: 'الملف الشخصي' },
   ];
 
   return (
