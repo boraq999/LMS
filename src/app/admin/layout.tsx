@@ -15,7 +15,6 @@ import {
   SidebarFooter,
   SidebarInset,
   SidebarTrigger,
-  SidebarRail,
 } from '@/components/ui/sidebar';
 import {
   LayoutDashboard,
@@ -173,7 +172,6 @@ function AdminLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
-          <SidebarRail/>
           <SidebarHeader className="p-4">
             <Logo />
           </SidebarHeader>
