@@ -15,6 +15,7 @@ import {
   SidebarFooter,
   SidebarInset,
   SidebarTrigger,
+  SidebarSeparator,
 } from '@/components/ui/sidebar';
 import {
   LayoutDashboard,
@@ -173,10 +174,11 @@ function StudentLayout({ children }: { children: ReactNode }) {
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
             <Logo />
           </SidebarHeader>
+           <SidebarSeparator className="my-1 opacity-0 group-data-[collapsible=icon]:opacity-100" />
           <SidebarContent>
             <SidebarMenu className="px-4 group-data-[collapsible=icon]:items-center">
               <SidebarMenuItem className='my-4 group-data-[collapsible=icon]:hidden'>
-                 <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
+                 <span className="mb-2 block text-xs font-semibold text-muted-foreground/80">
                     الصفحات
                   </span>
               </SidebarMenuItem>
