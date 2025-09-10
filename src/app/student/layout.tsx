@@ -170,7 +170,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
           <SidebarInset>{children}</SidebarInset>
         </div>
          <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
-          <SidebarHeader className="p-4">
+          <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center">
             <Logo />
           </SidebarHeader>
           <SidebarContent>
