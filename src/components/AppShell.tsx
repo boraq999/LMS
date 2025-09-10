@@ -15,7 +15,6 @@ import {
   SidebarFooter,
   SidebarTrigger,
   SidebarSeparator,
-  useSidebar,
 } from '@/components/ui/sidebar';
 import {
   ChevronDown,
@@ -148,24 +147,6 @@ function AppHeader({
   );
 }
 
-
-function MainContent({ children }: { children: ReactNode }) {
-  const { isMobile, state } = useSidebar();
-  
-  return (
-    <main
-      className={cn(
-        'flex w-full flex-1 flex-col transition-[padding] duration-200 ease-linear',
-        !isMobile && state === 'expanded' && 'md:pr-[var(--sidebar-width)]',
-        !isMobile && state === 'collapsed' && 'md:pr-[var(--sidebar-width-icon)]'
-      )}
-    >
-      {children}
-    </main>
-  );
-}
-
-
 export function AppShell({
   children,
   navItems,
@@ -229,10 +210,10 @@ export function AppShell({
               </SidebarMenu>
            </SidebarFooter>
         </Sidebar>
-         <MainContent>
+        <main className="flex-1">
             <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} />
             {children}
-        </MainContent>
+        </main>
       </div>
     </SidebarProvider>
   );
