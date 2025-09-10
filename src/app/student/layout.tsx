@@ -175,22 +175,22 @@ function StudentLayout({ children }: { children: ReactNode }) {
             <Logo />
           </SidebarHeader>
           <SidebarContent>
-            <SidebarMenu className="flex flex-col items-end justify-start px-4">
+            <SidebarMenu className="px-4">
               <SidebarMenuItem className='my-4'>
                  <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
                     الصفحات
                   </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
-                <SidebarMenuItem key={index} className='my-1 w-full'>
+                <SidebarMenuItem key={index} className='my-1'>
                   <SidebarMenuButton
                     asChild
                     size="lg"
                     isActive={pathname === item.href}
                     tooltip={{children: item.label, side: "left", align: "center"}}
-                    className="flex w-full flex-row-reverse justify-start text-lg"
+                    className="flex justify-end text-lg"
                   >
-                    <Link href={item.href} className="flex w-full flex-row-reverse items-center justify-start gap-4">
+                    <Link href={item.href} className="flex-row-reverse justify-end gap-4">
                       <span>{item.label}</span>
                       <item.icon className="h-5 w-5" />
                     </Link>
