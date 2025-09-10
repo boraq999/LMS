@@ -81,21 +81,23 @@ export default function StudentSchedulePage() {
                 <Table className="[&_td]:p-2 [&_th]:p-2 text-right">
                     <TableHeader>
                         <TableRow className="bg-muted/50">
-                            <TableHead className="w-32 text-center font-bold">الوقت</TableHead>
-                            {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
+                            <TableHead className="w-24 text-center font-bold">اليوم</TableHead>
+                            {scheduleData.periods.map(period => 
+                                <TableHead className="text-center font-bold" key={period.name}>
+                                    <div className="flex flex-col">
+                                        <span>{period.name}</span>
+                                        <span className="text-xs font-normal text-muted-foreground">{period.time}</span>
+                                    </div>
+                                </TableHead>
+                            )}
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {scheduleData.periods.map((period, periodIndex) => (
-                            <TableRow key={period.name}>
-                                <TableCell className="text-center font-medium">
-                                  <div className="flex flex-col">
-                                    <span>{period.name}</span>
-                                    <span className="text-xs text-muted-foreground">{period.time}</span>
-                                  </div>
-                                </TableCell>
-                                {scheduleData.days.map(day => (
-                                    <TableCell key={day} className="text-center">
+                        {scheduleData.days.map((day) => (
+                            <TableRow key={day}>
+                                <TableCell className="text-center font-medium">{day}</TableCell>
+                                {scheduleData.periods.map((_, periodIndex) => (
+                                    <TableCell key={periodIndex} className="text-center">
                                         {getSubjectBadge(scheduleData.schedule[day as keyof typeof scheduleData.schedule]?.[periodIndex])}
                                     </TableCell>
                                 ))}
@@ -109,4 +111,3 @@ export default function StudentSchedulePage() {
     </main>
   );
 }
-
