@@ -174,8 +174,8 @@ function StudentLayout({ children }: { children: ReactNode }) {
             <Logo />
           </SidebarHeader>
           <SidebarContent>
-            <SidebarMenu className="px-4">
-              <SidebarMenuItem className='my-4'>
+            <SidebarMenu className="px-4 group-data-[collapsible=icon]:items-center">
+              <SidebarMenuItem className='my-4 group-data-[collapsible=icon]:hidden'>
                  <span className="mb-2 block text-xs font-semibold text-muted-foreground/80 group-data-[collapsible=icon]:hidden">
                     الصفحات
                   </span>
