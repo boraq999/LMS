@@ -52,21 +52,21 @@ const HomeworkTable = ({ assignments }: { assignments: typeof homeworkData }) =>
     <Table>
         <TableHeader>
         <TableRow>
-            <TableHead>الواجب</TableHead>
-            <TableHead>المادة</TableHead>
-            <TableHead>تاريخ الاستحقاق</TableHead>
-            <TableHead>الحالة</TableHead>
-            <TableHead className="text-left">الإجراء</TableHead>
+            <TableHead className="text-center">الواجب</TableHead>
+            <TableHead className="text-center">المادة</TableHead>
+            <TableHead className="text-center">تاريخ الاستحقاق</TableHead>
+            <TableHead className="text-center">الحالة</TableHead>
+            <TableHead className="text-center">الإجراء</TableHead>
         </TableRow>
         </TableHeader>
         <TableBody>
         {assignments.map((assignment, index) => (
             <TableRow key={index}>
-            <TableCell className="font-medium">{assignment.name}</TableCell>
-            <TableCell>{assignment.course}</TableCell>
-            <TableCell>{assignment.dueDate}</TableCell>
-            <TableCell>{getStatusBadge(assignment.status)}</TableCell>
-            <TableCell className="text-left">
+            <TableCell className="font-medium text-center">{assignment.name}</TableCell>
+            <TableCell className="text-center">{assignment.course}</TableCell>
+            <TableCell className="text-center">{assignment.dueDate}</TableCell>
+            <TableCell className="text-center flex justify-center">{getStatusBadge(assignment.status)}</TableCell>
+            <TableCell className="text-center">
                 <Button variant="ghost" size="icon">
                     <Download className="h-4 w-4" />
                     <span className="sr-only">تنزيل</span>
