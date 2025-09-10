@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 interface User {
   username: string;
+  role: 'admin' | 'student';
 }
 
 interface AuthContextType {
@@ -38,10 +39,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = useCallback((username: string) => {
-    const newUser = { username };
+    const role = username.toLowerCase() === 'student' ? 'student' : 'admin';
+    const newUser: User = { username, role };
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));
-    router.push('/admin');
+    if (role === 'student') {
+        router.push('/student');
+    } else {
+        router.push('/admin');
+    }
   }, [router]);
 
   const logout = useCallback(() => {
@@ -53,7 +59,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Redirect if user is logged in and tries to access /login
   useEffect(() => {
     if (!loading && user && pathname === '/login') {
-      router.replace('/admin');
+       if (user.role === 'student') {
+        router.replace('/student');
+      } else {
+        router.replace('/admin');
+      }
     }
   }, [user, loading, pathname, router]);
 

@@ -13,7 +13,11 @@ export default function Home() {
   useEffect(() => {
     if (!loading) {
       if (user) {
-        router.replace('/admin');
+        if (user.role === 'student') {
+            router.replace('/student');
+        } else {
+            router.replace('/admin');
+        }
       } else {
         router.replace('/login');
       }
@@ -34,5 +38,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
