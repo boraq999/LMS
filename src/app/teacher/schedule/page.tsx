@@ -7,14 +7,16 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 
 const scheduleData = {
   days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
@@ -37,7 +39,7 @@ const scheduleData = {
 };
 
 const getSubjectBadge = (subject: string | null) => {
-    if (!subject) return null;
+    if (!subject) return <span className="text-muted-foreground/50">-</span>;
     const commonProps = "w-fit justify-center text-xs py-1 px-3";
 
     if (subject === 'استراحة') {
@@ -73,34 +75,32 @@ export default function TeacherSchedulePage() {
           <CardDescription>جدول الحصص المخصص لك للفصل الدراسي الحالي.</CardDescription>
         </CardHeader>
         <CardContent>
-            <div>
-              <Accordion type="single" collapsible defaultValue="الأحد" className="w-full">
-                {scheduleData.days.map(day => (
-                  <AccordionItem value={day} key={day}>
-                    <AccordionTrigger className="text-xl font-bold text-primary hover:no-underline">
-                      {day}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-3 pr-2">
-                        {scheduleData.periods.map((period, periodIndex) => {
-                          const subject = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex];
-                          if (!subject) return null;
-
-                          return (
-                            <li key={period.name} className="flex items-center justify-between rounded-lg border bg-muted/30 p-4">
-                              <div className="flex flex-col text-right">
-                                <span className="font-semibold text-base">{period.name}</span>
-                                <span className="text-sm text-muted-foreground">{period.time}</span>
-                              </div>
-                              {getSubjectBadge(subject)}
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+           <div className="overflow-hidden rounded-lg border">
+                <Table className="[&_td]:p-2 [&_th]:p-2 text-right">
+                    <TableHeader>
+                        <TableRow className="bg-muted/50">
+                            <TableHead className="w-24 text-center font-bold">الحصة</TableHead>
+                            {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {scheduleData.periods.map((period, periodIndex) => (
+                            <TableRow key={period.name}>
+                                <TableCell className="text-center font-medium">
+                                    <div className="flex flex-col">
+                                        <span>{period.name}</span>
+                                        <span className="text-xs font-normal text-muted-foreground">{period.time}</span>
+                                    </div>
+                                </TableCell>
+                                {scheduleData.days.map(day => (
+                                    <TableCell key={day} className="text-center">
+                                        {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </div>
         </CardContent>
       </Card>
