@@ -72,7 +72,7 @@ export default function TeacherAssignmentsPage() {
 
        <Card>
         <CardHeader>
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex-1">
               <CardTitle>قائمة الواجبات</CardTitle>
               <CardDescription>
