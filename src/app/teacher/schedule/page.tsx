@@ -37,7 +37,7 @@ const scheduleData = {
 };
 
 const getSubjectBadge = (subject: string | null) => {
-    if (!subject) return <span className="text-muted-foreground">-</span>;
+    if (!subject) return null;
     const commonProps = "w-fit justify-center text-xs py-1 px-3";
 
     if (subject === 'استراحة') {
@@ -84,6 +84,8 @@ export default function TeacherSchedulePage() {
                       <ul className="space-y-3 pr-2">
                         {scheduleData.periods.map((period, periodIndex) => {
                           const subject = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex];
+                          if (!subject) return null;
+
                           return (
                             <li key={period.name} className="flex items-center justify-between rounded-lg border bg-muted/30 p-4">
                               <div className="flex flex-col text-right">
