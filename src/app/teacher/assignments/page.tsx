@@ -135,7 +135,7 @@ export default function TeacherAssignmentsPage() {
                                 <span>{assignment.submissions} / {assignment.totalStudents}</span>
                             </div>
                         </CardContent>
-                        <CardFooter className="flex gap-2 p-2">
+                        <CardFooter className="flex gap-2 border-t pt-4 mt-4">
                              <Button variant="outline" size="sm" className="flex-1">
                                 <Edit className="ml-2 h-4 w-4" />
                                 تعديل
