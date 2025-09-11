@@ -17,7 +17,12 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from 'lucide-react';
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 const scheduleData = {
   days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
@@ -40,17 +45,13 @@ const scheduleData = {
 };
 
 const getSubjectBadge = (subject: string | null) => {
-    if (!subject) return null;
-    const commonProps = "w-full text-center justify-center text-xs py-1 px-2";
+    if (!subject) return <span className="text-muted-foreground">-</span>;
+    const commonProps = "w-fit justify-center text-xs py-1 px-3";
 
     if (subject === 'استراحة') {
         return <Badge variant="secondary" className={`${commonProps}`}>{subject}</Badge>;
     }
     
-    // Extract grade from subject string like "رياضيات - 5-أ"
-    const gradeMatch = subject.match(/(\d+)-/);
-    const grade = gradeMatch ? parseInt(gradeMatch[1]) : 0;
-
     if (subject.includes('5-أ')) return <Badge variant="default" className={`${commonProps} bg-blue-500/80 hover:bg-blue-500`}>{subject}</Badge>;
     if (subject.includes('5-ب')) return <Badge variant="default" className={`${commonProps} bg-sky-500/80 hover:bg-sky-500`}>{subject}</Badge>;
     if (subject.includes('6-أ')) return <Badge variant="default" className={`${commonProps} bg-green-500/80 hover:bg-green-500`}>{subject}</Badge>;
@@ -80,11 +81,12 @@ export default function TeacherSchedulePage() {
           <CardDescription>جدول الحصص المخصص لك للفصل الدراسي الحالي.</CardDescription>
         </CardHeader>
         <CardContent>
-            <div className="overflow-hidden rounded-lg border">
-                <Table className="[&_td]:p-2 [&_th]:p-2 text-right">
+            {/* Desktop View: Table */}
+            <div className="hidden md:block overflow-x-auto rounded-lg border">
+                <Table className="min-w-full text-right">
                     <TableHeader>
                         <TableRow className="bg-muted/50">
-                            <TableHead className="w-24 text-center font-bold">الحصة</TableHead>
+                            <TableHead className="w-32 text-center font-bold">الحصة</TableHead>
                             {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
                         </TableRow>
                     </TableHeader>
@@ -99,13 +101,44 @@ export default function TeacherSchedulePage() {
                                 </TableCell>
                                 {scheduleData.days.map(day => (
                                     <TableCell key={day} className="text-center">
-                                        {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
+                                        <div className="flex justify-center">
+                                          {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
+                                        </div>
                                     </TableCell>
                                 ))}
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+            </div>
+
+            {/* Mobile View: Accordion */}
+            <div className="md:hidden">
+              <Accordion type="single" collapsible defaultValue="الأحد">
+                {scheduleData.days.map(day => (
+                  <AccordionItem value={day} key={day}>
+                    <AccordionTrigger className="text-lg font-bold text-primary">
+                      {day}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-4">
+                        {scheduleData.periods.map((period, periodIndex) => {
+                          const subject = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex];
+                          return (
+                            <li key={period.name} className="flex items-center justify-between rounded-lg bg-muted/50 p-3">
+                              <div className="flex flex-col text-right">
+                                <span className="font-medium">{period.name}</span>
+                                <span className="text-xs text-muted-foreground">{period.time}</span>
+                              </div>
+                              {getSubjectBadge(subject)}
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
         </CardContent>
       </Card>
