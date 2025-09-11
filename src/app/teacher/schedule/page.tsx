@@ -78,8 +78,8 @@ export default function TeacherSchedulePage() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="w-[120px]">اليوم</TableHead>
-                            <TableHead>الحصص المجدولة</TableHead>
+                            <TableHead className="w-[120px] text-right font-bold">اليوم</TableHead>
+                            <TableHead className="text-right font-bold">الحصص المجدولة</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -102,8 +102,8 @@ export default function TeacherSchedulePage() {
                                         {scheduledPeriods.length > 0 ? (
                                             <div className="flex flex-wrap gap-4">
                                                 {scheduledPeriods.map((item) => item && (
-                                                    <div key={item.period.name} className="flex items-center gap-3 rounded-md border p-2 bg-muted/50">
-                                                        <div className="flex flex-col text-right">
+                                                    <div key={item.period.name} className="flex flex-col items-center justify-center gap-2 rounded-md border p-3 bg-muted/50 min-w-[140px]">
+                                                        <div className="flex flex-col text-center">
                                                             <span className="font-medium text-sm">{item.period.name}</span>
                                                             <span className="text-xs text-muted-foreground">{item.period.time}</span>
                                                         </div>
