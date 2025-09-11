@@ -7,14 +7,6 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from 'lucide-react';
 import {
@@ -81,56 +73,22 @@ export default function TeacherSchedulePage() {
           <CardDescription>جدول الحصص المخصص لك للفصل الدراسي الحالي.</CardDescription>
         </CardHeader>
         <CardContent>
-            {/* Desktop View: Table */}
-            <div className="hidden md:block overflow-x-auto rounded-lg border">
-                <Table className="min-w-full text-right">
-                    <TableHeader>
-                        <TableRow className="bg-muted/50">
-                            <TableHead className="w-32 text-center font-bold">اليوم</TableHead>
-                            {scheduleData.periods.map(period => (
-                                <TableHead className="text-center font-bold" key={period.name}>
-                                    <div className="flex flex-col">
-                                        <span>{period.name}</span>
-                                        <span className="text-xs font-normal text-muted-foreground">{period.time}</span>
-                                    </div>
-                                </TableHead>
-                            ))}
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {scheduleData.days.map((day) => (
-                            <TableRow key={day}>
-                                <TableCell className="text-center font-bold">{day}</TableCell>
-                                {scheduleData.periods.map((_, periodIndex) => (
-                                    <TableCell key={periodIndex} className="text-center">
-                                        <div className="flex justify-center">
-                                          {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
-                                        </div>
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
-
-            {/* Mobile View: Accordion */}
-            <div className="md:hidden">
-              <Accordion type="single" collapsible defaultValue="الأحد">
+            <div>
+              <Accordion type="single" collapsible defaultValue="الأحد" className="w-full">
                 {scheduleData.days.map(day => (
                   <AccordionItem value={day} key={day}>
-                    <AccordionTrigger className="text-lg font-bold text-primary">
+                    <AccordionTrigger className="text-xl font-bold text-primary hover:no-underline">
                       {day}
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="space-y-4">
+                      <ul className="space-y-3 pr-2">
                         {scheduleData.periods.map((period, periodIndex) => {
                           const subject = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex];
                           return (
-                            <li key={period.name} className="flex items-center justify-between rounded-lg bg-muted/50 p-3">
+                            <li key={period.name} className="flex items-center justify-between rounded-lg border bg-muted/30 p-4">
                               <div className="flex flex-col text-right">
-                                <span className="font-medium">{period.name}</span>
-                                <span className="text-xs text-muted-foreground">{period.time}</span>
+                                <span className="font-semibold text-base">{period.name}</span>
+                                <span className="text-sm text-muted-foreground">{period.time}</span>
                               </div>
                               {getSubjectBadge(subject)}
                             </li>
