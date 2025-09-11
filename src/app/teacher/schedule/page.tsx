@@ -98,11 +98,11 @@ export default function TeacherSchedulePage() {
                             return (
                                 <TableRow key={day} className="align-top">
                                     <TableCell className="font-semibold text-primary">{day}</TableCell>
-                                    <TableCell>
+                                    <TableCell className="py-2.5 px-0">
                                         {scheduledPeriods.length > 0 ? (
-                                            <div className="flex flex-wrap gap-4">
+                                            <div className="flex flex-wrap items-start gap-2">
                                                 {scheduledPeriods.map((item) => item && (
-                                                    <div key={item.period.name} className="flex flex-col items-center justify-center gap-2 rounded-md border p-3 bg-muted/50 min-w-[140px]">
+                                                    <div key={item.period.name} className="flex flex-col items-center justify-center gap-1 rounded-md border p-2 bg-muted/50 min-w-[140px]">
                                                         <div className="flex flex-col text-center">
                                                             <span className="font-medium text-sm">{item.period.name}</span>
                                                             <span className="text-xs text-muted-foreground">{item.period.time}</span>
@@ -112,7 +112,7 @@ export default function TeacherSchedulePage() {
                                                 ))}
                                             </div>
                                         ) : (
-                                            <p className="text-muted-foreground">لا توجد حصص مجدولة لهذا اليوم.</p>
+                                            <p className="text-muted-foreground px-4">لا توجد حصص مجدولة لهذا اليوم.</p>
                                         )}
                                     </TableCell>
                                 </TableRow>
