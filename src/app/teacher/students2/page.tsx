@@ -72,8 +72,8 @@ export default function TeacherAssignmentsPage() {
 
        <Card>
         <CardHeader>
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex-1">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div>
               <CardTitle>قائمة الواجبات</CardTitle>
               <CardDescription>
                 عرض الواجبات وتتبع تسليمات الطلاب.
