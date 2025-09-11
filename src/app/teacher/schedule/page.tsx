@@ -17,14 +17,6 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { useState } from 'react';
 
 
 const scheduleData = {
@@ -38,71 +30,54 @@ const scheduleData = {
     { time: '12:10 - 12:55', name: 'الحصة 5' },
     { time: '13:00 - 13:45', name: 'الحصة 6' },
   ],
-  schedules: {
-    'الرياضيات - الصف 5-أ': {
-        'الأحد': ['رياضيات', 'استراحة', 'رياضيات', 'استراحة', 'استراحة', 'علوم', 'انجليزي'],
-        'الإثنين': ['علوم', 'رياضيات', 'تاريخ', 'انجليزي', 'استراحة', 'جغرافيا', 'موسيقى'],
-        'الثلاثاء': ['انجليزي', 'تاريخ', 'رياضيات', 'علوم', 'استراحة', 'رياضة', 'فنون'],
-        'الأربعاء': ['تاريخ', 'انجليزي', 'علوم', 'رياضيات', 'استراحة', 'موسيقى', 'جغرافيا'],
-        'الخميس': ['رياضة', 'فنون', 'جغرافيا', 'موسيقى', 'استراحة', 'رياضيات', 'علوم'],
-    },
-    'الرياضيات - الصف 5-ب': {
-        'الأحد': ['انجليزي', 'علوم', 'رياضيات', 'رياضيات', 'استراحة', 'فنون', 'رياضة'],
-        'الإثنين': ['تاريخ', 'رياضيات', 'علوم', 'انجليزي', 'استراحة', 'جغرافيا', 'موسيقى'],
-        'الثلاثاء': ['رياضيات', 'تاريخ', 'انجليزي', 'علوم', 'استراحة', 'رياضة', 'فنون'],
-        'الأربعاء': ['علوم', 'انجليزي', 'تاريخ', 'رياضيات', 'استراحة', 'موسيقى', 'جغرافيا'],
-        'الخميس': ['فنون', 'رياضة', 'جغرافيا', 'موسيقى', 'استراحة', 'علوم', 'رياضيات'],
-    }
+  teacherSchedule: {
+    'الأحد': ['رياضيات - 5-أ', null, 'رياضيات - 6-أ', null, 'استراحة', 'رياضيات - 5-ب', null],
+    'الإثنين': [null, 'رياضيات - 5-ب', null, 'رياضيات - 6-ب', 'استراحة', null, 'رياضيات - 6-أ'],
+    'الثلاثاء': ['رياضيات - 6-ب', null, 'رياضيات - 5-أ', null, 'استراحة', 'رياضيات - 5-ب', null],
+    'الأربعاء': ['رياضيات - 5-أ', 'رياضيات - 6-أ', null, 'رياضيات - 5-ب', 'استراحة', null, 'رياضيات - 6-ب'],
+    'الخميس': [null, 'رياضيات - 5-ب', 'رياضيات - 6-ب', null, 'استراحة', 'رياضيات - 5-أ', null],
   }
 };
 
-const getSubjectBadge = (subject: string) => {
-  const commonProps = "w-full text-center justify-center text-xs py-1 px-2";
-  switch (subject) {
-    case 'رياضيات': return <Badge variant="default" className={`${commonProps} bg-blue-500/80 hover:bg-blue-500`}>رياضيات - 5-أ</Badge>;
-    case 'علوم': return <Badge variant="default" className={`${commonProps} bg-green-500/80 hover:bg-green-500`}>علوم - 5-أ</Badge>;
-    case 'انجليزي': return <Badge variant="default" className={`${commonProps} bg-red-500/80 hover:bg-red-500`}>انجليزي - 5-ب</Badge>;
-    case 'تاريخ': return <Badge variant="default" className={`${commonProps} bg-yellow-500/80 hover:bg-yellow-500 text-black`}>تاريخ - 6-أ</Badge>;
-    case 'فنون': return <Badge variant="default" className={`${commonProps} bg-purple-500/80 hover:bg-purple-500`}>فنون - 6-ب</Badge>;
-    case 'رياضة': return <Badge variant="default" className={`${commonProps} bg-orange-500/80 hover:bg-orange-500`}>رياضة - عام</Badge>;
-    case 'استراحة': return <Badge variant="secondary" className={`${commonProps}`}>{subject}</Badge>;
-    default: return <Badge variant="outline" className={commonProps}>{subject}</Badge>;
-  }
+const getSubjectBadge = (subject: string | null) => {
+    if (!subject) return null;
+    const commonProps = "w-full text-center justify-center text-xs py-1 px-2";
+
+    if (subject === 'استراحة') {
+        return <Badge variant="secondary" className={`${commonProps}`}>{subject}</Badge>;
+    }
+    
+    // Extract grade from subject string like "رياضيات - 5-أ"
+    const gradeMatch = subject.match(/(\d+)-/);
+    const grade = gradeMatch ? parseInt(gradeMatch[1]) : 0;
+
+    if (subject.includes('5-أ')) return <Badge variant="default" className={`${commonProps} bg-blue-500/80 hover:bg-blue-500`}>{subject}</Badge>;
+    if (subject.includes('5-ب')) return <Badge variant="default" className={`${commonProps} bg-sky-500/80 hover:bg-sky-500`}>{subject}</Badge>;
+    if (subject.includes('6-أ')) return <Badge variant="default" className={`${commonProps} bg-green-500/80 hover:bg-green-500`}>{subject}</Badge>;
+    if (subject.includes('6-ب')) return <Badge variant="default" className={`${commonProps} bg-emerald-500/80 hover:bg-emerald-500`}>{subject}</Badge>;
+    
+    return <Badge variant="outline" className={commonProps}>{subject}</Badge>;
 };
 
 
 export default function TeacherSchedulePage() {
-  const [selectedClass, setSelectedClass] = useState(Object.keys(scheduleData.schedules)[0]);
-  const currentSchedule = scheduleData.schedules[selectedClass as keyof typeof scheduleData.schedules];
 
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">الجدول الدراسي</h1>
-            <p className="text-muted-foreground">
-            عرض جدولك الأسبوعي للحصص والمواد الدراسية.
-            </p>
-        </div>
-         <Select value={selectedClass} onValueChange={setSelectedClass}>
-            <SelectTrigger className="w-full sm:w-[280px]">
-                <SelectValue placeholder="اختر الفصل" />
-            </SelectTrigger>
-            <SelectContent>
-                {Object.keys(scheduleData.schedules).map(cls => (
-                    <SelectItem key={cls} value={cls}>{cls}</SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">الجدول الدراسي</h1>
+        <p className="text-muted-foreground">
+          عرض جدولك الأسبوعي للحصص والفصول الدراسية.
+        </p>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calendar className="h-5 w-5" />
-            الجدول الأسبوعي لـ {selectedClass}
+            جدولي الأسبوعي
           </CardTitle>
-          <CardDescription>جدول الحصص للفصل الدراسي الحالي.</CardDescription>
+          <CardDescription>جدول الحصص المخصص لك للفصل الدراسي الحالي.</CardDescription>
         </CardHeader>
         <CardContent>
             <div className="overflow-hidden rounded-lg border">
@@ -124,7 +99,7 @@ export default function TeacherSchedulePage() {
                                 </TableCell>
                                 {scheduleData.days.map(day => (
                                     <TableCell key={day} className="text-center">
-                                        {getSubjectBadge(currentSchedule[day as keyof typeof currentSchedule]?.[periodIndex])}
+                                        {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
                                     </TableCell>
                                 ))}
                             </TableRow>
