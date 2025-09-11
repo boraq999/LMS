@@ -86,21 +86,23 @@ export default function TeacherSchedulePage() {
                 <Table className="min-w-full text-right">
                     <TableHeader>
                         <TableRow className="bg-muted/50">
-                            <TableHead className="w-32 text-center font-bold">الحصة</TableHead>
-                            {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {scheduleData.periods.map((period, periodIndex) => (
-                            <TableRow key={period.name}>
-                                <TableCell className="text-center font-medium">
+                            <TableHead className="w-32 text-center font-bold">اليوم</TableHead>
+                            {scheduleData.periods.map(period => (
+                                <TableHead className="text-center font-bold" key={period.name}>
                                     <div className="flex flex-col">
                                         <span>{period.name}</span>
                                         <span className="text-xs font-normal text-muted-foreground">{period.time}</span>
                                     </div>
-                                </TableCell>
-                                {scheduleData.days.map(day => (
-                                    <TableCell key={day} className="text-center">
+                                </TableHead>
+                            ))}
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {scheduleData.days.map((day) => (
+                            <TableRow key={day}>
+                                <TableCell className="text-center font-bold">{day}</TableCell>
+                                {scheduleData.periods.map((_, periodIndex) => (
+                                    <TableCell key={periodIndex} className="text-center">
                                         <div className="flex justify-center">
                                           {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
                                         </div>
