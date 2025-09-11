@@ -86,7 +86,7 @@ export default function TeacherSchedulePage() {
                         {scheduleData.days.map((day) => {
                             const dailyClasses = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule];
                             const scheduledPeriods = dailyClasses.map((subject, index) => {
-                                if (subject) {
+                                if (subject && subject !== 'استراحة') {
                                     return {
                                         subject,
                                         period: scheduleData.periods[index],
