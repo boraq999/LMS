@@ -72,26 +72,26 @@ export default function TeacherAssignmentsPage() {
 
        <Card>
         <CardHeader>
-          <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
               <CardTitle>قائمة الواجبات</CardTitle>
               <CardDescription>
                 عرض الواجبات وتتبع تسليمات الطلاب.
               </CardDescription>
             </div>
-            <div className="flex w-full flex-col items-stretch gap-2 md:w-auto md:flex-row md:items-center">
-              <div className="relative w-full md:w-auto">
+            <div className="flex w-full flex-col items-stretch gap-2 sm:flex-row md:w-auto">
+              <div className="relative flex-1 sm:flex-auto">
                 <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="ابحث عن واجب..."
-                  className="w-full rounded-lg bg-input pr-8 md:w-[200px]"
+                  className="w-full rounded-lg bg-input pr-8"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
               <Select value={classFilter} onValueChange={setClassFilter}>
-                <SelectTrigger className="w-full md:w-[150px]">
+                <SelectTrigger className="flex-1 sm:w-[150px]">
                   <SelectValue placeholder="كل الفصول" />
                 </SelectTrigger>
                 <SelectContent>
@@ -100,7 +100,7 @@ export default function TeacherAssignmentsPage() {
                 </SelectContent>
               </Select>
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full md:w-[120px]">
+                <SelectTrigger className="flex-1 sm:w-[120px]">
                   <SelectValue placeholder="الحالة" />
                 </SelectTrigger>
                 <SelectContent>
