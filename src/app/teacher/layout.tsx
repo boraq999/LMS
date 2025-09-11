@@ -19,7 +19,7 @@ const navItems = [
   { href: '/teacher', icon: LayoutDashboard, label: 'لوحة التحكم' },
   { href: '/teacher/classes', icon: BookOpen, label: 'فصولي' },
   { href: '/teacher/students', icon: Users, label: 'طلابي' },
-  { href: '/teacher/students2', icon: Users, label: 'طلابي 2' },
+  { href: '/teacher/assignments', icon: ClipboardCheck, label: 'الواجبات' },
   { href: '/teacher/schedule', icon: Calendar, label: 'الجدول الدراسي' },
   { href: '/teacher/profile', icon: User, label: 'الملف الشخصي' },
 ];
@@ -28,7 +28,7 @@ const pageTitles = {
   dashboard: 'لوحة التحكم',
   classes: 'فصولي',
   students: 'طلابي',
-  students2: 'طلابي 2',
+  assignments: 'الواجبات',
   schedule: 'الجدول الدراسي',
   profile: 'الملف الشخصي',
 };
