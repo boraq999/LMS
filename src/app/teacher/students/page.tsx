@@ -7,19 +7,12 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PlusCircle, Search, Eye, FileText, BarChart2 } from 'lucide-react';
+import { Search, Eye, FileText, BarChart2, User, Users } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const studentsData = [
@@ -50,7 +43,7 @@ export default function TeacherStudentsPage() {
 
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">طلابي</h1>
           <p className="text-muted-foreground">
@@ -69,70 +62,60 @@ export default function TeacherStudentsPage() {
         </div>
       </div>
       
-      <Card>
-        <CardHeader>
-            <CardTitle>قائمة الطلاب</CardTitle>
-            <CardDescription>
-                نظرة شاملة على جميع الطلاب في فصولك الدراسية.
-            </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>الطالب</TableHead>
-                <TableHead className="hidden sm:table-cell">الفصل</TableHead>
-                <TableHead className="hidden md:table-cell text-center">آخر درجة</TableHead>
-                <TableHead className="hidden md:table-cell text-center">نسبة الحضور</TableHead>
-                <TableHead className="text-center">إجراءات</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredStudents.map((student) => (
-                <TableRow key={student.id}>
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                        <Avatar>
-                            <AvatarImage src={`https://picsum.photos/seed/${student.avatar}/40/40`} alt={student.name} />
-                            <AvatarFallback>{student.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex flex-col">
-                            <span className="font-medium">{student.name}</span>
-                            <span className="text-sm text-muted-foreground md:hidden">{student.class}</span>
+       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {filteredStudents.map((student) => (
+            <Card key={student.id} className="flex flex-col">
+                <CardHeader>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <Avatar>
+                                <AvatarImage src={`https://picsum.photos/seed/${student.avatar}/40/40`} alt={student.name} data-ai-hint="student avatar" />
+                                <AvatarFallback>{student.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <CardTitle className="text-lg">{student.name}</CardTitle>
+                                <CardDescription>{student.class}</CardDescription>
+                            </div>
                         </div>
                     </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">{student.class}</TableCell>
-                  <TableCell className="hidden md:table-cell text-center">
-                    {getGradeBadge(student.lastGrade)}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell text-center">
-                    <Badge variant="outline">{student.attendance}</Badge>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <Button variant="ghost" size="icon" title="عرض الملف الشخصي">
+                </CardHeader>
+                <CardContent className="flex-grow space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">آخر درجة</span>
+                        {getGradeBadge(student.lastGrade)}
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">نسبة الحضور</span>
+                        <Badge variant="outline">{student.attendance}</Badge>
+                    </div>
+                </CardContent>
+                <CardFooter className="flex gap-2 p-4 pt-0">
+                    <Button variant="ghost" size="icon" title="عرض الملف الشخصي" className="flex-1">
                         <Eye className="h-4 w-4" />
                     </Button>
-                     <Button variant="ghost" size="icon" title="عرض الدرجات">
+                     <Button variant="ghost" size="icon" title="عرض الدرجات" className="flex-1">
                         <BarChart2 className="h-4 w-4" />
                     </Button>
-                     <Button variant="ghost" size="icon" title="عرض الواجبات">
+                     <Button variant="ghost" size="icon" title="عرض الواجبات" className="flex-1">
                         <FileText className="h-4 w-4" />
                     </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-               {filteredStudents.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5} className="h-24 text-center">
-                    لا يوجد طلاب يطابقون بحثك.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+                </CardFooter>
+            </Card>
+        ))}
+       </div>
+       {filteredStudents.length === 0 && (
+            <div className="flex flex-col items-center justify-center gap-4 py-16 text-center md:col-span-2 lg:col-span-3 xl:col-span-4">
+              <div className="rounded-full border border-dashed p-6">
+                <Users className="h-12 w-12 text-muted-foreground/50" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-xl font-semibold">لم يتم العثور على طلاب</h3>
+                <p className="text-muted-foreground max-w-sm">
+                  بحثك عن "{searchTerm}" لم يطابق أي طالب.
+                </p>
+              </div>
+            </div>
+        )}
     </main>
   );
 }
