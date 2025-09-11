@@ -72,45 +72,45 @@ export default function TeacherAssignmentsPage() {
 
        <Card>
         <CardHeader>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                <CardTitle>قائمة الواجبات</CardTitle>
-                <CardDescription>
+          <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex-1">
+              <CardTitle>قائمة الواجبات</CardTitle>
+              <CardDescription>
                 عرض الواجبات وتتبع تسليمات الطلاب.
-                </CardDescription>
-                </div>
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                    <div className="relative">
-                    <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                        type="search"
-                        placeholder="ابحث عن واجب..."
-                        className="w-full rounded-lg bg-input pr-8 sm:w-[200px]"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    </div>
-                    <Select value={classFilter} onValueChange={setClassFilter}>
-                        <SelectTrigger className="w-full sm:w-[150px]">
-                            <SelectValue placeholder="كل الفصول" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">كل الفصول</SelectItem>
-                            {classes.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                        </SelectContent>
-                    </Select>
-                    <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="w-full sm:w-[120px]">
-                            <SelectValue placeholder="الحالة" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">الكل</SelectItem>
-                            <SelectItem value="مفتوح">مفتوح</SelectItem>
-                            <SelectItem value="مغلق">مغلق</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+              </CardDescription>
             </div>
+            <div className="flex w-full flex-col items-stretch gap-2 md:w-auto md:flex-row md:items-center">
+              <div className="relative w-full md:w-auto">
+                <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="ابحث عن واجب..."
+                  className="w-full rounded-lg bg-input pr-8 md:w-[200px]"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <Select value={classFilter} onValueChange={setClassFilter}>
+                <SelectTrigger className="w-full md:w-[150px]">
+                  <SelectValue placeholder="كل الفصول" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">كل الفصول</SelectItem>
+                  {classes.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full md:w-[120px]">
+                  <SelectValue placeholder="الحالة" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">الكل</SelectItem>
+                  <SelectItem value="مفتوح">مفتوح</SelectItem>
+                  <SelectItem value="مغلق">مغلق</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
