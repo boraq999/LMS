@@ -39,19 +39,18 @@ const scheduleData = {
 };
 
 const getSubjectBadge = (subject: string | null) => {
-    if (!subject) return <span className="text-muted-foreground/50">-</span>;
-    const commonProps = "w-fit justify-center text-xs py-1 px-3";
+    if (!subject) return null;
 
     if (subject === 'استراحة') {
-        return <Badge variant="secondary" className={`${commonProps}`}>{subject}</Badge>;
+        return <Badge variant="secondary" className="text-xs">{subject}</Badge>;
     }
     
-    if (subject.includes('5-أ')) return <Badge variant="default" className={`${commonProps} bg-blue-500/80 hover:bg-blue-500`}>{subject}</Badge>;
-    if (subject.includes('5-ب')) return <Badge variant="default" className={`${commonProps} bg-sky-500/80 hover:bg-sky-500`}>{subject}</Badge>;
-    if (subject.includes('6-أ')) return <Badge variant="default" className={`${commonProps} bg-green-500/80 hover:bg-green-500`}>{subject}</Badge>;
-    if (subject.includes('6-ب')) return <Badge variant="default" className={`${commonProps} bg-emerald-500/80 hover:bg-emerald-500`}>{subject}</Badge>;
+    if (subject.includes('5-أ')) return <Badge variant="default" className={`bg-blue-500/80 hover:bg-blue-500`}>{subject}</Badge>;
+    if (subject.includes('5-ب')) return <Badge variant="default" className={`bg-sky-500/80 hover:bg-sky-500`}>{subject}</Badge>;
+    if (subject.includes('6-أ')) return <Badge variant="default" className={`bg-green-500/80 hover:bg-green-500`}>{subject}</Badge>;
+    if (subject.includes('6-ب')) return <Badge variant="default" className={`bg-emerald-500/80 hover:bg-emerald-500`}>{subject}</Badge>;
     
-    return <Badge variant="outline" className={commonProps}>{subject}</Badge>;
+    return <Badge variant="outline">{subject}</Badge>;
 };
 
 
@@ -76,29 +75,49 @@ export default function TeacherSchedulePage() {
         </CardHeader>
         <CardContent>
            <div className="overflow-hidden rounded-lg border">
-                <Table className="[&_td]:p-2 [&_th]:p-2 text-right">
+                <Table>
                     <TableHeader>
-                        <TableRow className="bg-muted/50">
-                            <TableHead className="w-24 text-center font-bold">الحصة</TableHead>
-                            {scheduleData.days.map(day => <TableHead className="text-center font-bold" key={day}>{day}</TableHead>)}
+                        <TableRow>
+                            <TableHead className="w-[120px]">اليوم</TableHead>
+                            <TableHead>الحصص المجدولة</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {scheduleData.periods.map((period, periodIndex) => (
-                            <TableRow key={period.name}>
-                                <TableCell className="text-center font-medium">
-                                    <div className="flex flex-col">
-                                        <span>{period.name}</span>
-                                        <span className="text-xs font-normal text-muted-foreground">{period.time}</span>
-                                    </div>
-                                </TableCell>
-                                {scheduleData.days.map(day => (
-                                    <TableCell key={day} className="text-center">
-                                        {getSubjectBadge(scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule]?.[periodIndex])}
+                        {scheduleData.days.map((day) => {
+                            const dailyClasses = scheduleData.teacherSchedule[day as keyof typeof scheduleData.teacherSchedule];
+                            const scheduledPeriods = dailyClasses.map((subject, index) => {
+                                if (subject) {
+                                    return {
+                                        subject,
+                                        period: scheduleData.periods[index],
+                                    };
+                                }
+                                return null;
+                            }).filter(Boolean);
+
+                            return (
+                                <TableRow key={day} className="align-top">
+                                    <TableCell className="font-semibold text-primary">{day}</TableCell>
+                                    <TableCell>
+                                        {scheduledPeriods.length > 0 ? (
+                                            <div className="flex flex-wrap gap-4">
+                                                {scheduledPeriods.map((item) => item && (
+                                                    <div key={item.period.name} className="flex items-center gap-3 rounded-md border p-2 bg-muted/50">
+                                                        <div className="flex flex-col text-right">
+                                                            <span className="font-medium text-sm">{item.period.name}</span>
+                                                            <span className="text-xs text-muted-foreground">{item.period.time}</span>
+                                                        </div>
+                                                        {getSubjectBadge(item.subject)}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <p className="text-muted-foreground">لا توجد حصص مجدولة لهذا اليوم.</p>
+                                        )}
                                     </TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </div>
