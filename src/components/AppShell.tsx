@@ -91,7 +91,7 @@ function AppHeader({
   if (isSuperAdmin && user) {
     return (
        <header className="sticky top-0 z-10 p-4 sm:p-6">
-         <div className="flex h-16 items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/80 px-4 shadow-lg backdrop-blur-sm sm:h-20 sm:px-6">
+         <div className="flex h-16 items-center gap-4 rounded-2xl border border-border/50 bg-card/80 px-4 shadow-lg backdrop-blur-sm sm:h-20 sm:px-6">
             <div className="flex items-center gap-4">
                 <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
                     <AvatarImage
@@ -104,22 +104,22 @@ function AppHeader({
                     </AvatarFallback>
                 </Avatar>
                 <div>
-                    <h1 className="text-lg font-bold text-white sm:text-xl">Welcome, {user.username}!</h1>
-                    <p className="hidden text-xs text-gray-400 sm:block">Here's your overview for today.</p>
+                    <h1 className="text-lg font-bold text-foreground sm:text-xl">أهلاً بعودتك، {user.username}!</h1>
+                    <p className="hidden text-xs text-muted-foreground sm:block">إليك نظرة عامة على يومك.</p>
                 </div>
             </div>
             <div className="mr-auto flex items-center gap-2 sm:gap-4">
                 <ThemeToggle />
-                <Button variant="ghost" size="icon" className="h-9 w-9 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white">
+                <Button variant="ghost" size="icon" className="h-9 w-9 bg-foreground/5 text-muted-foreground hover:bg-foreground/10 hover:text-foreground">
                     <MessageSquare className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-9 w-9 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white">
+                <Button variant="ghost" size="icon" className="h-9 w-9 bg-foreground/5 text-muted-foreground hover:bg-foreground/10 hover:text-foreground">
                     <Bell className="h-5 w-5" />
                 </Button>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-auto justify-start p-0 text-left" aria-label="user menu">
-                        <ChevronDown className="h-5 w-5 text-gray-400" />
+                        <ChevronDown className="h-5 w-5 text-muted-foreground" />
                     </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56" align="end">
@@ -149,7 +149,7 @@ function AppHeader({
   return (
     <header className={cn(
       "sticky top-0 z-10 flex h-14 items-center gap-4 px-4 sm:px-6",
-      isSuperAdmin ? "bg-zinc-900 border-b border-zinc-800" : "bg-background/80 border-b backdrop-blur-sm"
+      isSuperAdmin ? "bg-transparent" : "bg-background/80 border-b backdrop-blur-sm"
     )}>
       <div className="flex items-center gap-2">
         <SidebarTrigger />
@@ -166,7 +166,7 @@ function AppHeader({
             placeholder={isSuperAdmin ? "Type here..." : "اكتب هنا..."}
             className={cn(
                 "h-9 w-48 rounded-full pl-8",
-                isSuperAdmin ? "bg-zinc-800 border-zinc-700 text-gray-300 placeholder:text-gray-500" : "bg-input"
+                isSuperAdmin ? "bg-card border-border/50" : "bg-input"
             )}
           />
         </div>
