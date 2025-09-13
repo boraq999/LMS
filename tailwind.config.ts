@@ -66,6 +66,13 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        'super-admin-primary': {
+          DEFAULT: 'hsl(var(--super-admin-primary))',
+          foreground: 'hsl(var(--super-admin-primary-foreground))',
+        },
+        'super-admin-accent': {
+          DEFAULT: 'hsl(var(--super-admin-accent))',
+        }
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -98,5 +105,3 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
-
-    

@@ -17,8 +17,12 @@ export default function Home() {
             router.replace('/student');
         } else if (user.role === 'teacher') {
             router.replace('/teacher');
-        } else {
+        } else if (user.role === 'admin') {
             router.replace('/admin');
+        } else if (user.role === 'super-admin') {
+            router.replace('/super-admin');
+        } else {
+            router.replace('/login');
         }
       } else {
         router.replace('/login');

@@ -14,11 +14,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { School, UserCog, GraduationCap, UserCircle } from 'lucide-react';
+import { School, UserCog, GraduationCap, UserCircle, ShieldCheck } from 'lucide-react';
+
+type Role = 'admin' | 'student' | 'teacher' | 'super-admin';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
-  const [role, setRole] = useState<'admin' | 'student' | 'teacher'>('admin');
+  const [role, setRole] = useState<Role>('admin');
   const { login } = useAuth();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -30,7 +32,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md border-0 bg-card/80 shadow-2xl shadow-primary/10 backdrop-blur-sm">
+      <Card className="w-full max-w-lg border-0 bg-card/80 shadow-2xl shadow-primary/10 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="mb-4 flex justify-center">
             <div className="rounded-full bg-primary p-3 text-primary-foreground">
@@ -48,10 +50,20 @@ export default function LoginPage() {
               <Label>اختر دورك</Label>
               <RadioGroup
                 defaultValue="admin"
-                className="grid grid-cols-3 gap-4"
+                className="grid grid-cols-2 lg:grid-cols-4 gap-4"
                 value={role}
-                onValueChange={(value: 'admin' | 'student' | 'teacher') => setRole(value)}
+                onValueChange={(value: Role) => setRole(value)}
               >
+                <div>
+                  <RadioGroupItem value="super-admin" id="super-admin" className="peer sr-only" />
+                  <Label
+                    htmlFor="super-admin"
+                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                  >
+                    <ShieldCheck className="mb-3 h-6 w-6" />
+                    Super Admin
+                  </Label>
+                </div>
                 <div>
                   <RadioGroupItem value="admin" id="admin" className="peer sr-only" />
                   <Label
@@ -93,7 +105,7 @@ export default function LoginPage() {
               <Input
                 id="username"
                 type="text"
-                placeholder={role === 'admin' ? 'مثال: admin' : (role === 'teacher' ? 'مثال: teacher' : 'مثال: student')}
+                placeholder={role === 'admin' ? 'مثال: admin' : (role === 'teacher' ? 'مثال: teacher' : (role === 'student' ? 'مثال: student' : 'مثال: superadmin'))}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required

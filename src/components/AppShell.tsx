@@ -36,6 +36,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { cn } from '@/lib/utils';
 
 type NavItem = {
   href: string;
@@ -46,7 +47,7 @@ type NavItem = {
 type AppShellProps = {
   children: ReactNode;
   navItems: NavItem[];
-  userRole: 'admin' | 'student' | 'teacher';
+  userRole: 'admin' | 'student' | 'teacher' | 'super-admin';
   pageTitles: { [key: string]: string };
   defaultTitle: string;
 };
@@ -54,9 +55,11 @@ type AppShellProps = {
 function AppHeader({
   pageTitles,
   defaultTitle,
+  userRole
 }: {
   pageTitles: { [key: string]: string };
   defaultTitle: string;
+  userRole: AppShellProps['userRole'];
 }) {
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -64,7 +67,7 @@ function AppHeader({
   const getPageTitle = () => {
     const segments = pathname.split('/').filter(Boolean);
     const lastSegment = segments[segments.length - 1] || '';
-    if (!lastSegment || ['admin', 'student', 'teacher'].includes(lastSegment)) {
+    if (!lastSegment || ['admin', 'student', 'teacher', 'super-admin'].includes(lastSegment)) {
       return defaultTitle;
     }
     return pageTitles[lastSegment] || lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
@@ -76,16 +79,22 @@ function AppHeader({
       case 'admin': return 'مسؤول';
       case 'student': return 'طالب';
       case 'teacher': return 'معلم';
+      case 'super-admin': return 'Super Admin';
       default: return '';
     }
   };
+  
+  const isSuperAdmin = userRole === 'super-admin';
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
+    <header className={cn(
+      "sticky top-0 z-10 flex h-14 items-center gap-4 px-4 sm:px-6",
+      isSuperAdmin ? "bg-zinc-900 border-b border-zinc-800" : "bg-background/80 border-b backdrop-blur-sm"
+    )}>
       <div className="flex items-center gap-2">
         <SidebarTrigger />
         <span className="hidden text-sm text-muted-foreground md:inline">
-          / لوحات التحكم /
+          / {isSuperAdmin ? 'Dashboards' : 'لوحات التحكم'} /
         </span>
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
@@ -94,8 +103,11 @@ function AppHeader({
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="اكتب هنا..."
-            className="h-9 w-48 rounded-full bg-input pl-8"
+            placeholder={isSuperAdmin ? "Type here..." : "اكتب هنا..."}
+            className={cn(
+                "h-9 w-48 rounded-full pl-8",
+                isSuperAdmin ? "bg-zinc-800 border-zinc-700 text-gray-300 placeholder:text-gray-500" : "bg-input"
+            )}
           />
         </div>
 
@@ -124,7 +136,7 @@ function AppHeader({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="font-normal text-right">
+              <DropdownMenuLabel className="font-normal" dir={isSuperAdmin ? 'ltr' : 'rtl'}>
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
                     {user.username}
@@ -136,8 +148,8 @@ function AppHeader({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={logout}>
-                <span>تسجيل الخروج</span>
-                <LogOut className="ml-2 h-4 w-4" />
+                <span>{isSuperAdmin ? 'Logout' : 'تسجيل الخروج'}</span>
+                <LogOut className="mr-auto h-4 w-4" />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -156,24 +168,25 @@ export function AppShell({
 }: AppShellProps) {
   const { logout } = useAuth();
   const pathname = usePathname();
+  const isSuperAdmin = userRole === 'super-admin';
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full flex-row-reverse">
+      <div className={cn("flex min-h-screen w-full", isSuperAdmin ? "flex-row" : "flex-row-reverse")}>
         <div className="flex w-full flex-1 flex-col">
-          <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} />
+          <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} userRole={userRole} />
           <SidebarInset>{children}</SidebarInset>
         </div>
-        <Sidebar collapsible="icon" variant="sidebar" side="right" className="border-l">
+        <Sidebar collapsible="icon" variant={isSuperAdmin ? "floating" : "sidebar"} side={isSuperAdmin ? "left" : "right"} className={isSuperAdmin ? "border-r-0" : "border-l"}>
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
-            <Logo />
+            <Logo isSuperAdmin={isSuperAdmin} />
           </SidebarHeader>
           <SidebarSeparator className="my-1 opacity-0 group-data-[collapsible=icon]:opacity-100" />
           <SidebarContent>
             <SidebarMenu className="px-4 group-data-[collapsible=icon]:items-center">
               <SidebarMenuItem className="my-4 group-data-[collapsible=icon]:hidden">
                 <span className="mb-2 block text-xs font-semibold text-muted-foreground/80">
-                  الصفحات
+                  {isSuperAdmin ? 'Pages' : 'الصفحات'}
                 </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
@@ -182,17 +195,20 @@ export function AppShell({
                     asChild
                     size="lg"
                     isActive={pathname === item.href}
-                    tooltip={{ children: item.label, side: 'left', align: 'center' }}
-                    className="flex justify-end group-data-[collapsible=icon]:justify-center text-lg"
+                    tooltip={{ children: item.label, side: isSuperAdmin ? 'right' : 'left', align: 'center' }}
+                    className={cn(
+                        "text-lg",
+                        isSuperAdmin ? "flex justify-start group-data-[collapsible=icon]:justify-center" : "flex justify-end group-data-[collapsible=icon]:justify-center"
+                    )}
                   >
                     <Link
                       href={item.href}
-                      className="flex-row-reverse justify-end gap-4"
+                      className={cn("gap-4", isSuperAdmin ? "flex-row justify-start" : "flex-row-reverse justify-end")}
                     >
-                      <span className="group-data-[collapsible=icon]:hidden">
+                      <item.icon className="h-5 w-5" />
+                       <span className="group-data-[collapsible=icon]:hidden">
                         {item.label}
                       </span>
-                      <item.icon className="h-5 w-5" />
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -205,10 +221,13 @@ export function AppShell({
                   <SidebarMenuButton 
                     onClick={logout}
                     size="lg"
-                    tooltip={{children: "تسجيل الخروج", side: "left", align: "center"}}
-                    className="flex w-full flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center text-lg">
-                      <span className="group-data-[collapsible=icon]:hidden">تسجيل الخروج</span>
+                    tooltip={{children: isSuperAdmin ? "Logout" : "تسجيل الخروج", side: isSuperAdmin ? "right" : "left", align: "center"}}
+                    className={cn(
+                        "flex w-full text-lg",
+                        isSuperAdmin ? "flex-row justify-start group-data-[collapsible=icon]:justify-center" : "flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center"
+                    )}>
                       <LogOut className="h-5 w-5" />
+                      <span className="group-data-[collapsible=icon]:hidden">{isSuperAdmin ? "Logout" : "تسجيل الخروج"}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

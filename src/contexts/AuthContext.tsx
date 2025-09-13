@@ -6,13 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 interface User {
   username: string;
-  role: 'admin' | 'student' | 'teacher';
+  role: 'admin' | 'student' | 'teacher' | 'super-admin';
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (username: string, role: 'admin' | 'student' | 'teacher') => void;
+  login: (username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin') => void;
   logout: () => void;
 }
 
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = useCallback((username: string, role: 'admin' | 'student' | 'teacher') => {
+  const login = useCallback((username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin') => {
     const newUser: User = { username, role };
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));
@@ -46,8 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.replace('/student');
     } else if (role === 'teacher') {
         router.replace('/teacher');
-    } else {
+    } else if (role === 'admin') {
         router.replace('/admin');
+    } else if (role === 'super-admin') {
+        router.replace('/super-admin');
     }
   }, [router]);
 
@@ -64,8 +66,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.replace('/student');
       } else if (user.role === 'teacher') {
         router.replace('/teacher');
-       } else {
+       } else if (user.role === 'admin') {
         router.replace('/admin');
+      } else if (user.role === 'super-admin') {
+        router.replace('/super-admin');
       }
     }
   }, [user, loading, pathname, router]);
