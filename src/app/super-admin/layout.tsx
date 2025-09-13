@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
+import Image from 'next/image';
 
 const navItems = [
   { href: '/super-admin', icon: LayoutDashboard, label: 'Dashboard' },
@@ -64,15 +65,24 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="text-gray-300 dark:bg-[hsl(var(--super-admin-background))] bg-[hsl(var(--super-admin-background))]">
-        <AppShell
-            navItems={navItems}
-            userRole="super-admin"
-            pageTitles={pageTitles}
-            defaultTitle="Dashboard"
-            >
-            {children}
-        </AppShell>
+    <div className="relative text-gray-300 dark:bg-[hsl(var(--super-admin-background))] bg-[hsl(var(--super-admin-background))]">
+        <Image
+          src="https://picsum.photos/seed/tech-bg/1920/1080"
+          alt="Abstract technology background"
+          data-ai-hint="abstract technology"
+          fill
+          className="object-cover object-center opacity-10 dark:opacity-20"
+        />
+        <div className="relative z-10">
+            <AppShell
+                navItems={navItems}
+                userRole="super-admin"
+                pageTitles={pageTitles}
+                defaultTitle="Dashboard"
+                >
+                {children}
+            </AppShell>
+        </div>
     </div>
   );
 }
