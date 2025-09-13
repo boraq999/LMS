@@ -65,14 +65,7 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="relative text-gray-300 dark:bg-transparent bg-transparent">
-        <Image
-          src="https://picsum.photos/seed/grey-texture/1920/1080"
-          alt="Grey texture background"
-          data-ai-hint="grey texture"
-          fill
-          className="object-cover object-center opacity-30 dark:opacity-20"
-        />
+    <div className="relative text-gray-300">
         <div className="relative z-10">
             <AppShell
                 navItems={navItems}
