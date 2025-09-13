@@ -71,13 +71,6 @@ export default function SuperAdminDashboard() {
 
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Welcome, {user?.username || 'Administrator'}!</h1>
-        <p className="text-gray-400">
-          Here's your overview for today.
-        </p>
-      </div>
-      
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -199,7 +192,7 @@ export default function SuperAdminDashboard() {
           </CardHeader>
           <CardContent className="space-y-4">
              <div className="grid grid-cols-7 gap-2 text-center text-xs text-gray-400">
-                {upcomingEvents.map(d => <div key={d.day}>{d.day}</div>)}
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d}>{d}</div>)}
              </div>
               <div className="grid grid-cols-7 gap-2">
                   {upcomingEvents.map((dayData, i) => (
