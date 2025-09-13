@@ -109,6 +109,7 @@ function AppHeader({
                 </div>
             </div>
             <div className="mr-auto flex items-center gap-2 sm:gap-4">
+                <ThemeToggle />
                 <Button variant="ghost" size="icon" className="h-9 w-9 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white">
                     <MessageSquare className="h-5 w-5" />
                 </Button>
