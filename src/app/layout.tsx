@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import { Tajawal } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
 const tajawal = Tajawal({ 
   subsets: ['arabic'], 
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <body className={`${tajawal.variable} font-sans antialiased`}>
+      <body className={cn(
+          `${tajawal.variable} font-sans antialiased`,
+          "bg-background text-foreground"
+      )}>
         <Providers>{children}</Providers>
       </body>
     </html>
