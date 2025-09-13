@@ -44,6 +44,7 @@ body {
     --super-admin-primary: 198 93% 60%;
     --super-admin-primary-foreground: 224 71% 4%;
     --super-admin-accent: 300 81% 60%;
+    --super-admin-background: 220 20% 97%;
   }
 
   .dark {
@@ -75,6 +76,8 @@ body {
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 217 33% 22%;
     --sidebar-ring: var(--ring);
+
+    --super-admin-background: 224 71% 4%;
   }
 }
 

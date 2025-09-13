@@ -64,7 +64,7 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="bg-zinc-950 text-gray-300">
+    <div className="text-gray-300 dark:bg-[hsl(var(--super-admin-background))] bg-[hsl(var(--super-admin-background))]">
         <AppShell
             navItems={navItems}
             userRole="super-admin"
