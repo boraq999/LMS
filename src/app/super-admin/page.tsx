@@ -72,31 +72,31 @@ export default function SuperAdminDashboard() {
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-zinc-900 border-zinc-800">
+        <Card className="border-border/50 bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-400">Total Students</CardTitle>
-            <Users className="h-4 w-4 text-gray-400" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Students</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">1,250</div>
+            <div className="text-2xl font-bold">1,250</div>
           </CardContent>
         </Card>
-        <Card className="bg-zinc-900 border-zinc-800">
+        <Card className="border-border/50 bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-400">Active Faculty</CardTitle>
-            <UserCheck className="h-4 w-4 text-gray-400" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Active Faculty</CardTitle>
+            <UserCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">95</div>
+            <div className="text-2xl font-bold">95</div>
           </CardContent>
         </Card>
-        <Card className="bg-zinc-900 border-zinc-800 col-span-2">
+        <Card className="col-span-2 border-border/50 bg-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Revenue This Month</CardTitle>
-                <DollarSign className="h-4 w-4 text-gray-400" />
+                <CardTitle className="text-sm font-medium text-muted-foreground">Revenue This Month</CardTitle>
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                 <div className="text-2xl font-bold text-white mb-2">+$150K</div>
+                 <div className="text-2xl font-bold mb-2">+$150K</div>
                 <ChartContainer config={chartConfig} className="h-10 w-full">
                     <AreaChart
                         data={revenueData}
@@ -133,9 +133,9 @@ export default function SuperAdminDashboard() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-5">
-        <Card className="bg-zinc-900 border-zinc-800 lg:col-span-3">
+        <Card className="lg:col-span-3 border-border/50 bg-card">
           <CardHeader>
-            <CardTitle className="text-white">Financial Overview</CardTitle>
+            <CardTitle className="text-foreground">Financial Overview</CardTitle>
             <CardDescription>Income vs Expenses</CardDescription>
           </CardHeader>
           <CardContent>
@@ -151,14 +151,14 @@ export default function SuperAdminDashboard() {
             </ChartContainer>
           </CardContent>
         </Card>
-        <Card className="bg-zinc-900 border-zinc-800 lg:col-span-2">
+        <Card className="lg:col-span-2 border-border/50 bg-card">
           <CardHeader>
-            <CardTitle className="text-white">Real-time Attendance</CardTitle>
+            <CardTitle className="text-foreground">Real-time Attendance</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-center justify-center h-[250px] gap-4">
             <div className="relative h-32 w-32">
                 <svg className="absolute inset-0" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="hsl(var(--border) / 0.1)" strokeWidth="10"/>
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="hsl(var(--border) / 0.2)" strokeWidth="10"/>
                     <circle 
                         cx="50" cy="50" r="45" 
                         fill="none" 
@@ -171,32 +171,32 @@ export default function SuperAdminDashboard() {
                     />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                     <span className="text-3xl font-bold text-white">92%</span>
-                     <span className="text-sm text-gray-400">Present</span>
+                     <span className="text-3xl font-bold">92%</span>
+                     <span className="text-sm text-muted-foreground">Present</span>
                 </div>
             </div>
             <div className="flex justify-around w-full text-sm">
-                <div className="text-center"><span className="text-gray-400">Total</span> <br/> 1250</div>
-                <div className="text-center"><span className="text-gray-400">Present</span> <br/> 1150</div>
-                <div className="text-center"><span className="text-gray-400">Absent</span> <br/> 100</div>
+                <div className="text-center"><span className="text-muted-foreground">Total</span> <br/> 1250</div>
+                <div className="text-center"><span className="text-muted-foreground">Present</span> <br/> 1150</div>
+                <div className="text-center"><span className="text-muted-foreground">Absent</span> <br/> 100</div>
             </div>
           </CardContent>
         </Card>
       </div>
 
        <div className="grid gap-6 lg:grid-cols-5">
-         <Card className="bg-zinc-900 border-zinc-800 lg:col-span-3">
+         <Card className="lg:col-span-3 border-border/50 bg-card">
           <CardHeader>
-            <CardTitle className="text-white">Upcoming Events</CardTitle>
+            <CardTitle className="text-foreground">Upcoming Events</CardTitle>
             <CardDescription>Calendar view of school events.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-             <div className="grid grid-cols-7 gap-2 text-center text-xs text-gray-400">
+             <div className="grid grid-cols-7 gap-2 text-center text-xs text-muted-foreground">
                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d}>{d}</div>)}
              </div>
               <div className="grid grid-cols-7 gap-2">
                   {upcomingEvents.map((dayData, i) => (
-                      <div key={i} className="h-16 rounded-md bg-zinc-950/50 border border-zinc-800/50 p-1.5 space-y-1">
+                      <div key={i} className="h-16 rounded-md bg-background/50 border border-border/50 p-1.5 space-y-1">
                           {dayData.events.map((event, j) => (
                               <div key={j} className={`h-2 w-full rounded-full ${
                                   event.type === 'event' ? 'bg-super-admin-primary' :
@@ -209,20 +209,20 @@ export default function SuperAdminDashboard() {
               </div>
           </CardContent>
         </Card>
-        <Card className="bg-zinc-900 border-zinc-800 lg:col-span-2">
+        <Card className="lg:col-span-2 border-border/50 bg-card">
            <CardHeader>
-            <CardTitle className="text-white">Notifications Center</CardTitle>
+            <CardTitle className="text-foreground">Notifications Center</CardTitle>
             <CardDescription>Recent system alerts and actions.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {notifications.map((notif, index) => (
                  <div key={index} className="flex items-start gap-4">
-                    <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-gray-300">
+                    <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground">
                         <notif.icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                         <p className="text-sm">{notif.text}</p>
-                        <p className="text-xs text-gray-500">{notif.time}</p>
+                        <p className="text-xs text-muted-foreground">{notif.time}</p>
                     </div>
                 </div>
             ))}
@@ -232,3 +232,5 @@ export default function SuperAdminDashboard() {
     </main>
   );
 }
+
+    
