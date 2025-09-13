@@ -22,6 +22,8 @@ import {
   LogOut,
   Search,
   type LucideIcon,
+  Bell,
+  MessageSquare,
 } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -85,6 +87,63 @@ function AppHeader({
   };
   
   const isSuperAdmin = userRole === 'super-admin';
+
+  if (isSuperAdmin && user) {
+    return (
+       <header className="sticky top-0 z-10 p-4 sm:p-6">
+         <div className="flex h-16 items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/80 px-4 shadow-lg backdrop-blur-sm sm:h-20 sm:px-6">
+            <div className="flex items-center gap-4">
+                <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
+                    <AvatarImage
+                      src={`https://picsum.photos/seed/${user.username}/48/48`}
+                      alt={user.username}
+                      data-ai-hint="profile picture"
+                    />
+                    <AvatarFallback>
+                      {user.username.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                </Avatar>
+                <div>
+                    <h1 className="text-lg font-bold text-white sm:text-xl">Welcome, {user.username}!</h1>
+                    <p className="hidden text-xs text-gray-400 sm:block">Here's your overview for today.</p>
+                </div>
+            </div>
+            <div className="mr-auto flex items-center gap-2 sm:gap-4">
+                <Button variant="ghost" size="icon" className="h-9 w-9 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white">
+                    <MessageSquare className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" className="h-9 w-9 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white">
+                    <Bell className="h-5 w-5" />
+                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-auto justify-start p-0 text-left" aria-label="user menu">
+                        <ChevronDown className="h-5 w-5 text-gray-400" />
+                    </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end">
+                    <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">
+                            {user.username}
+                        </p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                            {getRoleName()}
+                        </p>
+                        </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onSelect={logout}>
+                        <span>Logout</span>
+                        <LogOut className="mr-auto h-4 w-4" />
+                    </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+         </div>
+       </header>
+    );
+  }
 
   return (
     <header className={cn(
