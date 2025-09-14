@@ -229,10 +229,7 @@ export default function SuperAdminDashboard() {
           </CardContent>
         </Card>
       </div>
+
     </main>
   );
 }
-
-    
-
-    
