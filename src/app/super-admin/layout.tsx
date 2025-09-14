@@ -18,25 +18,25 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
 
 const navItems = [
-  { href: '/super-admin', icon: LayoutDashboard, label: 'Dashboard' },
-  { href: '#', icon: Users, label: 'Students' },
-  { href: '#', icon: UserCog, label: 'Teachers' },
-  { href: '#', icon: CalendarCheck, label: 'Attendance' },
-  { href: '#', icon: Banknote, label: 'Finance' },
-  { href: '#', icon: BookCopy, label: 'Academic' },
-  { href: '#', icon: MessageSquare, label: 'Comms' },
-  { href: '#', icon: Settings, label: 'Settings' },
+  { href: '/super-admin', icon: LayoutDashboard, label: 'لوحة التحكم' },
+  { href: '#', icon: Users, label: 'الطلاب' },
+  { href: '#', icon: UserCog, label: 'المعلمون' },
+  { href: '#', icon: CalendarCheck, label: 'الحضور' },
+  { href: '#', icon: Banknote, label: 'المالية' },
+  { href: '#', icon: BookCopy, label: 'الشؤون الأكاديمية' },
+  { href: '#', icon: MessageSquare, label: 'التواصل' },
+  { href: '#', icon: Settings, label: 'الإعدادات' },
 ];
 
 const pageTitles = {
-  'super-admin': 'Dashboard',
-  students: 'Students',
-  teachers: 'Teachers',
-  attendance: 'Attendance',
-  finance: 'Finance',
-  academic: 'Academic',
-  comms: 'Comms',
-  settings: 'Settings',
+  'super-admin': 'لوحة التحكم',
+  students: 'الطلاب',
+  teachers: 'المعلمون',
+  attendance: 'الحضور',
+  finance: 'المالية',
+  academic: 'الشؤون الأكاديمية',
+  comms: 'التواصل',
+  settings: 'الإعدادات',
 };
 
 function SuperAdminLayout({ children }: { children: ReactNode }) {
@@ -76,7 +76,7 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
         navItems={navItems}
         userRole="super-admin"
         pageTitles={pageTitles}
-        defaultTitle="Dashboard"
+        defaultTitle="لوحة التحكم"
       >
         {children}
       </AppShell>

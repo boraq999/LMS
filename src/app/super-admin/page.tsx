@@ -17,50 +17,50 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Progress } from '@/components/ui/progress';
 
 const revenueData = [
-    { month: "Jan", revenue: 12000 },
-    { month: "Feb", revenue: 18000 },
-    { month: "Mar", revenue: 15000 },
-    { month: "Apr", revenue: 22000 },
-    { month: "May", revenue: 25000 },
-    { month: "Jun", revenue: 30000 },
+    { month: "يناير", revenue: 12000 },
+    { month: "فبراير", revenue: 18000 },
+    { month: "مارس", revenue: 15000 },
+    { month: "أبريل", revenue: 22000 },
+    { month: "مايو", revenue: 25000 },
+    { month: "يونيو", revenue: 30000 },
 ];
 
 const financialOverviewData = [
-  { name: 'Jan', income: 4000, expenses: 2400 },
-  { name: 'Feb', income: 3000, expenses: 1398 },
-  { name: 'Mar', income: 2000, expenses: 9800 },
-  { name: 'Apr', income: 2780, expenses: 3908 },
-  { name: 'May', income: 1890, expenses: 4800 },
-  { name: 'Jun', income: 2390, expenses: 3800 },
+  { name: 'يناير', income: 4000, expenses: 2400 },
+  { name: 'فبراير', income: 3000, expenses: 1398 },
+  { name: 'مارس', income: 2000, expenses: 9800 },
+  { name: 'أبريل', income: 2780, expenses: 3908 },
+  { name: 'مايو', income: 1890, expenses: 4800 },
+  { name: 'يونيو', income: 2390, expenses: 3800 },
 ];
 
 const upcomingEvents = [
-    { day: "Mon", events: [{type: 'event'}, {type: 'holiday'}] },
-    { day: "Tue", events: [] },
-    { day: "Wed", events: [{type: 'event'}] },
-    { day: "Thu", events: [] },
-    { day: "Fri", events: [{type: 'exam'}] },
-    { day: "Sat", events: [] },
-    { day: "Sun", events: [] },
+    { day: "الإثنين", events: [{type: 'event'}, {type: 'holiday'}] },
+    { day: "الثلاثاء", events: [] },
+    { day: "الأربعاء", events: [{type: 'event'}] },
+    { day: "الخميس", events: [] },
+    { day: "الجمعة", events: [{type: 'exam'}] },
+    { day: "السبت", events: [] },
+    { day: "الأحد", events: [] },
 ]
 
 const notifications = [
-    { icon: UserPlus, text: "A new student has been enrolled in Grade 5.", time: "2 min ago"},
-    { icon: Activity, text: "Leave request from J. Smith requires approval.", time: "1 hour ago"},
-    { icon: DollarSign, text: "Invoice #1234 has been paid.", time: "4 hours ago"},
+    { icon: UserPlus, text: "تم تسجيل طالب جديد في الصف الخامس.", time: "منذ دقيقتين"},
+    { icon: Activity, text: "طلب إجازة من (ج. سميث) يتطلب الموافقة.", time: "منذ ساعة"},
+    { icon: DollarSign, text: "تم دفع الفاتورة رقم #1234.", time: "منذ 4 ساعات"},
 ]
 
 const chartConfig = {
   revenue: {
-    label: 'Revenue',
+    label: 'الإيرادات',
     color: 'hsl(var(--super-admin-primary))',
   },
   income: {
-    label: 'Income',
+    label: 'الدخل',
     color: 'hsl(var(--super-admin-primary))',
   },
   expenses: {
-    label: 'Expenses',
+    label: 'المصروفات',
     color: 'hsl(var(--super-admin-accent))',
   }
 };
@@ -74,7 +74,7 @@ export default function SuperAdminDashboard() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Students</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">إجمالي الطلاب</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -83,7 +83,7 @@ export default function SuperAdminDashboard() {
         </Card>
         <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Active Faculty</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">أعضاء هيئة التدريس</CardTitle>
             <UserCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -92,11 +92,11 @@ export default function SuperAdminDashboard() {
         </Card>
         <Card className="col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Revenue This Month</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">إيرادات هذا الشهر</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                 <div className="text-2xl font-bold mb-2">+$150K</div>
+                 <div className="text-2xl font-bold mb-2">+$150 ألف</div>
                 <ChartContainer config={chartConfig} className="h-10 w-full">
                     <AreaChart
                         data={revenueData}
@@ -135,8 +135,8 @@ export default function SuperAdminDashboard() {
       <div className="grid gap-6 lg:grid-cols-5">
         <Card className="lg:col-span-3 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-foreground">Financial Overview</CardTitle>
-            <CardDescription>Income vs Expenses</CardDescription>
+            <CardTitle className="text-foreground">نظرة عامة على المالية</CardTitle>
+            <CardDescription>الدخل مقابل المصروفات</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
@@ -153,7 +153,7 @@ export default function SuperAdminDashboard() {
         </Card>
         <Card className="lg:col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-foreground">Real-time Attendance</CardTitle>
+            <CardTitle className="text-foreground">الحضور في الوقت الفعلي</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-center justify-center h-[250px] gap-4">
             <div className="relative h-32 w-32">
@@ -172,13 +172,13 @@ export default function SuperAdminDashboard() {
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                      <span className="text-3xl font-bold">92%</span>
-                     <span className="text-sm text-muted-foreground">Present</span>
+                     <span className="text-sm text-muted-foreground">حاضر</span>
                 </div>
             </div>
             <div className="flex justify-around w-full text-sm">
-                <div className="text-center"><span className="text-muted-foreground">Total</span> <br/> 1250</div>
-                <div className="text-center"><span className="text-muted-foreground">Present</span> <br/> 1150</div>
-                <div className="text-center"><span className="text-muted-foreground">Absent</span> <br/> 100</div>
+                <div className="text-center"><span className="text-muted-foreground">الإجمالي</span> <br/> 1250</div>
+                <div className="text-center"><span className="text-muted-foreground">حاضر</span> <br/> 1150</div>
+                <div className="text-center"><span className="text-muted-foreground">غائب</span> <br/> 100</div>
             </div>
           </CardContent>
         </Card>
@@ -187,12 +187,12 @@ export default function SuperAdminDashboard() {
        <div className="grid gap-6 lg:grid-cols-5">
          <Card className="lg:col-span-3 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-foreground">Upcoming Events</CardTitle>
-            <CardDescription>Calendar view of school events.</CardDescription>
+            <CardTitle className="text-foreground">الأحداث القادمة</CardTitle>
+            <CardDescription>عرض تقويم أحداث المدرسة.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
              <div className="grid grid-cols-7 gap-2 text-center text-xs text-muted-foreground">
-                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d}>{d}</div>)}
+                {['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'].map(d => <div key={d}>{d}</div>)}
              </div>
               <div className="grid grid-cols-7 gap-2">
                   {upcomingEvents.map((dayData, i) => (
@@ -211,8 +211,8 @@ export default function SuperAdminDashboard() {
         </Card>
         <Card className="lg:col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
            <CardHeader>
-            <CardTitle className="text-foreground">Notifications Center</CardTitle>
-            <CardDescription>Recent system alerts and actions.</CardDescription>
+            <CardTitle className="text-foreground">مركز الإشعارات</CardTitle>
+            <CardDescription>تنبيهات وإجراءات النظام الأخيرة.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {notifications.map((notif, index) => (

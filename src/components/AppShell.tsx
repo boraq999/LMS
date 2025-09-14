@@ -81,7 +81,7 @@ function AppHeader({
       case 'admin': return 'مسؤول';
       case 'student': return 'طالب';
       case 'teacher': return 'معلم';
-      case 'super-admin': return 'Super Admin';
+      case 'super-admin': return 'مشرف متميز';
       default: return '';
     }
   };
@@ -135,7 +135,7 @@ function AppHeader({
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onSelect={logout}>
-                        <span>Logout</span>
+                        <span>تسجيل الخروج</span>
                         <LogOut className="mr-auto h-4 w-4" />
                     </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -154,7 +154,7 @@ function AppHeader({
       <div className="flex items-center gap-2">
         <SidebarTrigger />
         <span className="hidden text-sm text-muted-foreground md:inline">
-          / {isSuperAdmin ? 'Dashboards' : 'لوحات التحكم'} /
+          / {isSuperAdmin ? 'لوحات التحكم' : 'لوحات التحكم'} /
         </span>
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
@@ -163,7 +163,7 @@ function AppHeader({
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={isSuperAdmin ? "Type here..." : "اكتب هنا..."}
+            placeholder={isSuperAdmin ? "اكتب هنا..." : "اكتب هنا..."}
             className={cn(
                 "h-9 w-48 rounded-full pl-8",
                 isSuperAdmin ? "bg-card border-border/50" : "bg-input"
@@ -196,7 +196,7 @@ function AppHeader({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="font-normal" dir={isSuperAdmin ? 'ltr' : 'rtl'}>
+              <DropdownMenuLabel className="font-normal" dir={isSuperAdmin ? 'rtl' : 'rtl'}>
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
                     {user.username}
@@ -208,7 +208,7 @@ function AppHeader({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={logout}>
-                <span>{isSuperAdmin ? 'Logout' : 'تسجيل الخروج'}</span>
+                <span>{isSuperAdmin ? 'تسجيل الخروج' : 'تسجيل الخروج'}</span>
                 <LogOut className="mr-auto h-4 w-4" />
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -246,7 +246,7 @@ export function AppShell({
             <SidebarMenu className="px-4 group-data-[collapsible=icon]:items-center">
               <SidebarMenuItem className="my-4 group-data-[collapsible=icon]:hidden">
                 <span className="mb-2 block text-xs font-semibold text-muted-foreground/80">
-                  {isSuperAdmin ? 'Pages' : 'الصفحات'}
+                  {isSuperAdmin ? 'الصفحات' : 'الصفحات'}
                 </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
@@ -281,13 +281,13 @@ export function AppShell({
                   <SidebarMenuButton 
                     onClick={logout}
                     size="lg"
-                    tooltip={{children: isSuperAdmin ? "Logout" : "تسجيل الخروج", side: isSuperAdmin ? "right" : "left", align: "center"}}
+                    tooltip={{children: isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج", side: isSuperAdmin ? "right" : "left", align: "center"}}
                     className={cn(
                         "flex w-full text-lg",
                         isSuperAdmin ? "flex-row justify-start group-data-[collapsible=icon]:justify-center" : "flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center"
                     )}>
                       <LogOut className="h-5 w-5" />
-                      <span className="group-data-[collapsible=icon]:hidden">{isSuperAdmin ? "Logout" : "تسجيل الخروج"}</span>
+                      <span className="group-data-[collapsible=icon]:hidden">{isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج"}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
