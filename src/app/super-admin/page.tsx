@@ -72,7 +72,7 @@ export default function SuperAdminDashboard() {
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="border-border/50 bg-card">
+        <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Students</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -81,7 +81,7 @@ export default function SuperAdminDashboard() {
             <div className="text-2xl font-bold">1,250</div>
           </CardContent>
         </Card>
-        <Card className="border-border/50 bg-card">
+        <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Active Faculty</CardTitle>
             <UserCheck className="h-4 w-4 text-muted-foreground" />
@@ -90,7 +90,7 @@ export default function SuperAdminDashboard() {
             <div className="text-2xl font-bold">95</div>
           </CardContent>
         </Card>
-        <Card className="col-span-2 border-border/50 bg-card">
+        <Card className="col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Revenue This Month</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -133,7 +133,7 @@ export default function SuperAdminDashboard() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-5">
-        <Card className="lg:col-span-3 border-border/50 bg-card">
+        <Card className="lg:col-span-3 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-foreground">Financial Overview</CardTitle>
             <CardDescription>Income vs Expenses</CardDescription>
@@ -151,7 +151,7 @@ export default function SuperAdminDashboard() {
             </ChartContainer>
           </CardContent>
         </Card>
-        <Card className="lg:col-span-2 border-border/50 bg-card">
+        <Card className="lg:col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-foreground">Real-time Attendance</CardTitle>
           </CardHeader>
@@ -185,7 +185,7 @@ export default function SuperAdminDashboard() {
       </div>
 
        <div className="grid gap-6 lg:grid-cols-5">
-         <Card className="lg:col-span-3 border-border/50 bg-card">
+         <Card className="lg:col-span-3 border-border/50 bg-card/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-foreground">Upcoming Events</CardTitle>
             <CardDescription>Calendar view of school events.</CardDescription>
@@ -209,7 +209,7 @@ export default function SuperAdminDashboard() {
               </div>
           </CardContent>
         </Card>
-        <Card className="lg:col-span-2 border-border/50 bg-card">
+        <Card className="lg:col-span-2 border-border/50 bg-card/80 backdrop-blur-sm">
            <CardHeader>
             <CardTitle className="text-foreground">Notifications Center</CardTitle>
             <CardDescription>Recent system alerts and actions.</CardDescription>
@@ -232,5 +232,7 @@ export default function SuperAdminDashboard() {
     </main>
   );
 }
+
+    
 
     
