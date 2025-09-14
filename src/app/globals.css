@@ -89,12 +89,12 @@ body {
     @apply bg-background text-foreground;
   }
 
-  .dark body {
+  .dark body.super-admin-body {
     background-color: #0d1117;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0),
-      radial-gradient(circle at 15px 15px, rgba(255,255,255,0.1) 1px, transparent 0);
-    background-size: 30px 30px;
+  }
+
+  body.super-admin-body {
+      background-color: var(--super-admin-background);
   }
 }
 

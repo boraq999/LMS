@@ -17,6 +17,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
 import Image from 'next/image';
+import VenomBeam from '@/components/ui/venom-beam';
 
 const navItems = [
   { href: '/super-admin', icon: LayoutDashboard, label: 'Dashboard' },
@@ -66,16 +67,17 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="relative text-gray-300">
-        <div className="relative z-10">
-            <AppShell
-                navItems={navItems}
-                userRole="super-admin"
-                pageTitles={pageTitles}
-                defaultTitle="Dashboard"
-                >
-                {children}
-            </AppShell>
-        </div>
+      <VenomBeam />
+      <div className="relative z-10">
+        <AppShell
+          navItems={navItems}
+          userRole="super-admin"
+          pageTitles={pageTitles}
+          defaultTitle="Dashboard"
+        >
+          {children}
+        </AppShell>
+      </div>
     </div>
   );
 }
