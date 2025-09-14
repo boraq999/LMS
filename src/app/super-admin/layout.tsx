@@ -17,6 +17,8 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
 import Image from 'next/image';
+import { BeamsUpstream } from "@/components/ui/beams-upstream";
+
 
 const navItems = [
   { href: '/super-admin', icon: LayoutDashboard, label: 'Dashboard' },
@@ -72,14 +74,17 @@ function SuperAdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AppShell
-      navItems={navItems}
-      userRole="super-admin"
-      pageTitles={pageTitles}
-      defaultTitle="Dashboard"
-    >
-      {children}
-    </AppShell>
+    <>
+      <BeamsUpstream className="z-[-1]" />
+      <AppShell
+        navItems={navItems}
+        userRole="super-admin"
+        pageTitles={pageTitles}
+        defaultTitle="Dashboard"
+      >
+        {children}
+      </AppShell>
+    </>
   );
 }
 
