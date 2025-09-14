@@ -232,7 +232,7 @@ export function AppShell({
 
   return (
     <SidebarProvider>
-      <div className={cn("flex min-h-screen w-full", isSuperAdmin ? "flex-row" : "flex-row-reverse")}>
+      <div className={cn("flex min-h-screen w-full flex-row-reverse")}>
         <div className="flex w-full flex-1 flex-col">
           <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} userRole={userRole} />
           <SidebarInset>{children}</SidebarInset>
