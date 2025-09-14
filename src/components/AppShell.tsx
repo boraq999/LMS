@@ -237,7 +237,7 @@ export function AppShell({
           <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} userRole={userRole} />
           <SidebarInset>{children}</SidebarInset>
         </div>
-        <Sidebar collapsible="icon" variant={isSuperAdmin ? "floating" : "sidebar"} side={isSuperAdmin ? "left" : "right"} className={isSuperAdmin ? "border-r-0" : "border-l"}>
+        <Sidebar collapsible="icon" variant={isSuperAdmin ? "floating" : "sidebar"} side="right" className={isSuperAdmin ? "border-l-0" : "border-l"}>
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
             <Logo isSuperAdmin={isSuperAdmin} />
           </SidebarHeader>
@@ -255,15 +255,15 @@ export function AppShell({
                     asChild
                     size="lg"
                     isActive={pathname === item.href}
-                    tooltip={{ children: item.label, side: isSuperAdmin ? 'right' : 'left', align: 'center' }}
+                    tooltip={{ children: item.label, side: isSuperAdmin ? 'left' : 'left', align: 'center' }}
                     className={cn(
                         "text-lg",
-                        isSuperAdmin ? "flex justify-start group-data-[collapsible=icon]:justify-center" : "flex justify-end group-data-[collapsible=icon]:justify-center"
+                        "flex justify-end group-data-[collapsible=icon]:justify-center"
                     )}
                   >
                     <Link
                       href={item.href}
-                      className={cn("gap-4", isSuperAdmin ? "flex-row justify-start" : "flex-row-reverse justify-end")}
+                      className={cn("gap-4", "flex-row-reverse justify-end")}
                     >
                       <item.icon className="h-5 w-5" />
                        <span className="group-data-[collapsible=icon]:hidden">
@@ -281,10 +281,10 @@ export function AppShell({
                   <SidebarMenuButton 
                     onClick={logout}
                     size="lg"
-                    tooltip={{children: isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج", side: isSuperAdmin ? "right" : "left", align: "center"}}
+                    tooltip={{children: isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج", side: isSuperAdmin ? 'left' : 'left', align: "center"}}
                     className={cn(
                         "flex w-full text-lg",
-                        isSuperAdmin ? "flex-row justify-start group-data-[collapsible=icon]:justify-center" : "flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center"
+                        "flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center"
                     )}>
                       <LogOut className="h-5 w-5" />
                       <span className="group-data-[collapsible=icon]:hidden">{isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج"}</span>
