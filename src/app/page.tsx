@@ -21,6 +21,8 @@ export default function Home() {
             router.replace('/admin');
         } else if (user.role === 'super-admin') {
             router.replace('/super-admin');
+        } else if (user.role === 'finance') {
+            router.replace('/finance');
         } else {
             router.replace('/login');
         }

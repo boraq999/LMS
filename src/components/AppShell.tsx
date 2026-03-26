@@ -49,19 +49,27 @@ type NavItem = {
 type AppShellProps = {
   children: ReactNode;
   navItems: NavItem[];
-  userRole: 'admin' | 'student' | 'teacher' | 'super-admin';
+  userRole: 'admin' | 'student' | 'teacher' | 'super-admin' | 'finance';
   pageTitles: { [key: string]: string };
   defaultTitle: string;
+  /**
+   * Optional style variant to emulate another role's visual style
+   * without changing behavior/links. Use 'super' for super-admin look
+   * and 'finance' for finance look. Defaults to 'default'.
+   */
+  styleVariant?: 'default' | 'super' | 'finance';
 };
 
 function AppHeader({
   pageTitles,
   defaultTitle,
-  userRole
+  userRole,
+  styleVariant = 'default'
 }: {
   pageTitles: { [key: string]: string };
   defaultTitle: string;
   userRole: AppShellProps['userRole'];
+  styleVariant?: AppShellProps['styleVariant'];
 }) {
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -82,16 +90,19 @@ function AppHeader({
       case 'student': return 'طالب';
       case 'teacher': return 'معلم';
       case 'super-admin': return 'مشرف متميز';
+      case 'finance': return 'مسؤول مالي';
       default: return '';
     }
   };
   
-  const isSuperAdmin = userRole === 'super-admin';
+  const isSuperAdmin = userRole === 'super-admin' || styleVariant === 'super';
+  const isFinance = userRole === 'finance' || styleVariant === 'finance';
 
-  if (isSuperAdmin && user) {
+  if ((isSuperAdmin || isFinance) && user) {
     return (
        <header className="sticky top-0 z-10 p-4 sm:p-6">
          <div className="flex h-16 items-center gap-4 rounded-2xl border border-border/50 bg-card/80 px-4 shadow-lg backdrop-blur-sm sm:h-20 sm:px-6">
+            <SidebarTrigger />
             <div className="flex items-center gap-4">
                 <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
                     <AvatarImage
@@ -149,12 +160,12 @@ function AppHeader({
   return (
     <header className={cn(
       "sticky top-0 z-10 flex h-14 items-center gap-4 px-4 sm:px-6",
-      isSuperAdmin ? "bg-transparent" : "bg-background/80 border-b backdrop-blur-sm"
+      (isSuperAdmin || isFinance) ? "bg-transparent" : "bg-background/80 border-b backdrop-blur-sm"
     )}>
       <div className="flex items-center gap-2">
         <SidebarTrigger />
         <span className="hidden text-sm text-muted-foreground md:inline">
-          / {isSuperAdmin ? 'لوحات التحكم' : 'لوحات التحكم'} /
+          / {(isSuperAdmin || isFinance) ? 'لوحات التحكم' : 'لوحات التحكم'} /
         </span>
         <h1 className="text-md font-semibold">{getPageTitle()}</h1>
       </div>
@@ -163,10 +174,10 @@ function AppHeader({
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={isSuperAdmin ? "اكتب هنا..." : "اكتب هنا..."}
+            placeholder={(isSuperAdmin || isFinance) ? "اكتب هنا..." : "اكتب هنا..."}
             className={cn(
                 "h-9 w-48 rounded-full pl-8",
-                isSuperAdmin ? "bg-card border-border/50" : "bg-input"
+                (isSuperAdmin || isFinance) ? "bg-card border-border/50" : "bg-input"
             )}
           />
         </div>
@@ -196,7 +207,7 @@ function AppHeader({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="font-normal" dir={isSuperAdmin ? 'rtl' : 'rtl'}>
+              <DropdownMenuLabel className="font-normal" dir={(isSuperAdmin || isFinance) ? 'rtl' : 'rtl'}>
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
                     {user.username}
@@ -208,7 +219,7 @@ function AppHeader({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={logout}>
-                <span>{isSuperAdmin ? 'تسجيل الخروج' : 'تسجيل الخروج'}</span>
+                <span>{(isSuperAdmin || isFinance) ? 'تسجيل الخروج' : 'تسجيل الخروج'}</span>
                 <LogOut className="mr-auto h-4 w-4" />
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -225,28 +236,30 @@ export function AppShell({
   userRole,
   pageTitles,
   defaultTitle,
+  styleVariant = 'default',
 }: AppShellProps) {
   const { logout } = useAuth();
   const pathname = usePathname();
-  const isSuperAdmin = userRole === 'super-admin';
+  const isSuperStyle = userRole === 'super-admin' || styleVariant === 'super';
+  const isFinanceStyle = userRole === 'finance' || styleVariant === 'finance';
 
   return (
     <SidebarProvider>
       <div className={cn("flex min-h-screen w-full flex-row-reverse")}>
         <div className="flex w-full flex-1 flex-col">
-          <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} userRole={userRole} />
+          <AppHeader pageTitles={pageTitles} defaultTitle={defaultTitle} userRole={userRole} styleVariant={styleVariant} />
           <SidebarInset>{children}</SidebarInset>
         </div>
-        <Sidebar collapsible="icon" variant={isSuperAdmin ? "floating" : "sidebar"} side="right" className={isSuperAdmin ? "border-l-0" : "border-l"}>
+        <Sidebar collapsible="icon" variant={(isSuperStyle || isFinanceStyle) ? "floating" : "sidebar"} side="right" className={(isSuperStyle || isFinanceStyle) ? "border-l-0" : "border-l"}>
           <SidebarHeader className="p-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
-            <Logo isSuperAdmin={isSuperAdmin} />
+            <Logo isSuperAdmin={isSuperStyle} isFinance={isFinanceStyle} />
           </SidebarHeader>
           <SidebarSeparator className="my-1 opacity-0 group-data-[collapsible=icon]:opacity-100" />
           <SidebarContent>
             <SidebarMenu className="px-4 group-data-[collapsible=icon]:items-center">
               <SidebarMenuItem className="my-4 group-data-[collapsible=icon]:hidden">
                 <span className="mb-2 block text-xs font-semibold text-muted-foreground/80">
-                  {isSuperAdmin ? 'الصفحات' : 'الصفحات'}
+                  {(isSuperStyle || isFinanceStyle) ? 'الصفحات' : 'الصفحات'}
                 </span>
               </SidebarMenuItem>
               {navItems.map((item, index) => (
@@ -255,7 +268,7 @@ export function AppShell({
                     asChild
                     size="lg"
                     isActive={pathname === item.href}
-                    tooltip={{ children: item.label, side: isSuperAdmin ? 'left' : 'left', align: 'center' }}
+                    tooltip={{ children: item.label, side: (isSuperStyle || isFinanceStyle) ? 'left' : 'left', align: 'center' }}
                     className={cn(
                         "text-lg",
                         "flex justify-end group-data-[collapsible=icon]:justify-center"
@@ -281,13 +294,13 @@ export function AppShell({
                   <SidebarMenuButton 
                     onClick={logout}
                     size="lg"
-                    tooltip={{children: isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج", side: isSuperAdmin ? 'left' : 'left', align: "center"}}
+                    tooltip={{children: (isSuperStyle || isFinanceStyle) ? "تسجيل الخروج" : "تسجيل الخروج", side: (isSuperStyle || isFinanceStyle) ? 'left' : 'left', align: "center"}}
                     className={cn(
                         "flex w-full text-lg",
                         "flex-row-reverse justify-end group-data-[collapsible=icon]:justify-center"
                     )}>
                       <LogOut className="h-5 w-5" />
-                      <span className="group-data-[collapsible=icon]:hidden">{isSuperAdmin ? "تسجيل الخروج" : "تسجيل الخروج"}</span>
+                      <span className="group-data-[collapsible=icon]:hidden">{(isSuperStyle || isFinanceStyle) ? "تسجيل الخروج" : "تسجيل الخروج"}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

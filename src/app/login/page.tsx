@@ -14,9 +14,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { School, UserCog, GraduationCap, UserCircle, ShieldCheck } from 'lucide-react';
+import { School, UserCog, GraduationCap, UserCircle, ShieldCheck, DollarSign } from 'lucide-react';
 
-type Role = 'admin' | 'student' | 'teacher' | 'super-admin';
+type Role = 'admin' | 'student' | 'teacher' | 'super-admin' | 'finance';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -50,7 +50,7 @@ export default function LoginPage() {
               <Label>اختر دورك</Label>
               <RadioGroup
                 defaultValue="admin"
-                className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+                className="grid grid-cols-2 lg:grid-cols-5 gap-4"
                 value={role}
                 onValueChange={(value: Role) => setRole(value)}
               >
@@ -72,6 +72,16 @@ export default function LoginPage() {
                   >
                     <UserCog className="mb-3 h-6 w-6" />
                     مسؤول
+                  </Label>
+                </div>
+                <div>
+                  <RadioGroupItem value="finance" id="finance" className="peer sr-only" />
+                  <Label
+                    htmlFor="finance"
+                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                  >
+                    <DollarSign className="mb-3 h-6 w-6" />
+                    المالية
                   </Label>
                 </div>
                  <div>
@@ -105,7 +115,7 @@ export default function LoginPage() {
               <Input
                 id="username"
                 type="text"
-                placeholder={role === 'admin' ? 'مثال: admin' : (role === 'teacher' ? 'مثال: teacher' : (role === 'student' ? 'مثال: student' : 'مثال: superadmin'))}
+                placeholder={role === 'admin' ? 'مثال: admin' : (role === 'teacher' ? 'مثال: teacher' : (role === 'student' ? 'مثال: الطالب_2' : (role === 'finance' ? 'مثال: finance' : 'مثال: superadmin')))}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required

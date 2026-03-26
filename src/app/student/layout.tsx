@@ -11,6 +11,13 @@ import {
   User,
   GraduationCap,
   ClipboardList,
+  UserCheck,
+  BarChart3,
+  MessageSquare,
+  DollarSign,
+  Library,
+  Trophy,
+  FileText,
 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AppShell } from '@/components/AppShell';
@@ -21,6 +28,13 @@ const navItems = [
   { href: '/student/grades', icon: GraduationCap, label: 'الدرجات' },
   { href: '/student/schedule', icon: Calendar, label: 'الجدول الدراسي' },
   { href: '/student/homework', icon: ClipboardList, label: 'الواجبات' },
+  { href: '/student/attendance', icon: UserCheck, label: 'الحضور والغياب' },
+  { href: '/student/exams', icon: BarChart3, label: 'الامتحانات' },
+  { href: '/student/messages', icon: MessageSquare, label: 'الرسائل' },
+  { href: '/student/finance', icon: DollarSign, label: 'الشؤون المالية' },
+  { href: '/student/library', icon: Library, label: 'المكتبة الرقمية' },
+  { href: '/student/activities', icon: Trophy, label: 'الأنشطة والفعاليات' },
+  { href: '/student/reports', icon: FileText, label: 'التقارير والإحصائيات' },
   { href: '/student/profile', icon: User, label: 'الملف الشخصي' },
 ];
 
@@ -31,6 +45,13 @@ const pageTitles = {
   grades: 'الدرجات',
   schedule: 'الجدول الدراسي',
   homework: 'الواجبات',
+  attendance: 'الحضور والغياب',
+  exams: 'الامتحانات',
+  messages: 'الرسائل',
+  finance: 'الشؤون المالية',
+  library: 'المكتبة الرقمية',
+  activities: 'الأنشطة والفعاليات',
+  reports: 'التقارير والإحصائيات',
   profile: 'الملف الشخصي',
 };
 
@@ -65,6 +86,7 @@ function StudentLayout({ children }: { children: ReactNode }) {
       userRole="student"
       pageTitles={pageTitles}
       defaultTitle="لوحة التحكم"
+      styleVariant="super"
     >
       {children}
     </AppShell>

@@ -10,6 +10,10 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, UserCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useMemo, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const subjectsData = [
   { name: 'الرياضيات', teacher: 'أ. محمد عبدالله', grade: 92 },
@@ -28,6 +32,57 @@ const getGradeColor = (grade: number) => {
 };
 
 export default function StudentSubjectsPage() {
+  const [selectedSubjectName, setSelectedSubjectName] = useState<string | null>(null);
+
+  const subjectResources = useMemo(() => {
+    return {
+      'الرياضيات': {
+        homework: [
+          { title: 'حل مسائل من 10 إلى 20', dueDate: '2025-09-20', status: 'قيد الإنجاز' },
+          { title: 'مراجعة الجبر الفصل 2', dueDate: '2025-09-25', status: 'غير مكتمل' },
+        ],
+        exams: [
+          { title: 'امتحان نهائي 2023', year: 2023, numQuestions: 30 },
+          { title: 'امتحان نصف فصل 2024', year: 2024, numQuestions: 20 },
+        ],
+      },
+      'العلوم': {
+        homework: [
+          { title: 'تقرير عن دورة الماء', dueDate: '2025-09-18', status: 'مكتمل' },
+        ],
+        exams: [
+          { title: 'اختبار الوحدات 2023', year: 2023, numQuestions: 25 },
+        ],
+      },
+      default: {
+        homework: [
+          { title: 'واجب عام للمادة', dueDate: '2025-09-22', status: 'قيد الإنجاز' },
+        ],
+        exams: [
+          { title: 'أسئلة عامة سابقة', year: 2022, numQuestions: 15 },
+        ],
+      },
+    } as Record<string, { homework: { title: string; dueDate: string; status: string }[]; exams: { title: string; year: number; numQuestions: number }[] }>;
+  }, []);
+
+  const selectedSubject = useMemo(() => {
+    if (!selectedSubjectName) return null;
+    const subject = subjectsData.find((s) => s.name === selectedSubjectName) || null;
+    return subject;
+  }, [selectedSubjectName]);
+
+  const sortedHomework = useMemo(() => {
+    if (!selectedSubjectName) return [] as { title: string; dueDate: string; status: string }[];
+    const list = subjectResources[selectedSubjectName]?.homework || subjectResources.default.homework;
+    return [...list].sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime());
+  }, [selectedSubjectName, subjectResources]);
+
+  const sortedExams = useMemo(() => {
+    if (!selectedSubjectName) return [] as { title: string; year: number; numQuestions: number }[];
+    const list = subjectResources[selectedSubjectName]?.exams || subjectResources.default.exams;
+    return [...list].sort((a, b) => b.year - a.year);
+  }, [selectedSubjectName, subjectResources]);
+
   return (
     <main className="flex-1 space-y-6 p-4 sm:p-6 md:p-8">
       <div className="space-y-2">
@@ -39,7 +94,14 @@ export default function StudentSubjectsPage() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {subjectsData.map((subject, index) => (
-          <Card key={index} className="flex flex-col">
+          <Card
+            key={index}
+            onClick={() => setSelectedSubjectName(subject.name)}
+            className={cn(
+              'flex flex-col cursor-pointer transition-colors',
+              selectedSubjectName === subject.name ? 'ring-2 ring-primary' : ''
+            )}
+          >
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -69,6 +131,78 @@ export default function StudentSubjectsPage() {
           </Card>
         ))}
       </div>
+
+      <Dialog open={Boolean(selectedSubject)} onOpenChange={(o) => { if (!o) setSelectedSubjectName(null); }}>
+        <DialogContent className="max-w-[min(90%,800px)] rounded-lg">
+          {selectedSubject && (
+            <div>
+              <DialogHeader>
+                <DialogTitle className="flex items-center justify-between">
+                  <span>{selectedSubject.name}</span>
+                  <Badge className={getGradeColor(selectedSubject.grade)}>{selectedSubject.grade}%</Badge>
+                </DialogTitle>
+                <div className="text-sm text-muted-foreground">بإشراف: {selectedSubject.teacher}</div>
+              </DialogHeader>
+              <div className="mt-4">
+                <Tabs defaultValue="homework" className="w-full">
+                  <div className="flex justify-center">
+                    <TabsList>
+                      <TabsTrigger value="homework">الواجبات</TabsTrigger>
+                      <TabsTrigger value="exams">أسئلة الامتحانات السابقة</TabsTrigger>
+                    </TabsList>
+                  </div>
+
+                  <TabsContent value="homework">
+                    <div className="mt-4 space-y-3">
+                      {sortedHomework.map((hw, idx) => (
+                        <div key={idx} className="flex items-center justify-between rounded-md border p-3">
+                          <div>
+                            <div className="font-medium">{hw.title}</div>
+                            <div className="text-xs text-muted-foreground">تاريخ التسليم: {hw.dueDate}</div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="secondary">{hw.status}</Badge>
+                            <Button size="sm" variant="outline" onClick={() => console.log('open homework', selectedSubject.name, idx)}>
+                              فتح
+                            </Button>
+                            <Button size="sm" onClick={() => console.log('download homework', selectedSubject.name, idx)}>
+                              تحميل
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="exams">
+                    <div className="mt-4 space-y-3">
+                      {sortedExams.map((ex, idx) => (
+                        <div key={idx} className="rounded-md border p-3">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="font-medium">{ex.title}</div>
+                              <div className="text-xs text-muted-foreground mt-1">عدد الأسئلة: {ex.numQuestions}</div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="text-xs text-muted-foreground">السنة: {ex.year}</div>
+                              <Button size="sm" variant="outline" onClick={() => console.log('open exam', selectedSubject.name, idx)}>
+                                فتح
+                              </Button>
+                              <Button size="sm" onClick={() => console.log('download exam', selectedSubject.name, idx)}>
+                                تحميل
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }

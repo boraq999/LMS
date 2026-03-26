@@ -72,6 +72,13 @@ export default {
         },
         'super-admin-accent': {
           DEFAULT: 'hsl(var(--super-admin-accent))',
+        },
+        'finance-primary': {
+          DEFAULT: 'hsl(var(--finance-primary))',
+          foreground: 'hsl(var(--finance-primary-foreground))',
+        },
+        'finance-accent': {
+          DEFAULT: 'hsl(var(--finance-accent))',
         }
       },
       borderRadius: {

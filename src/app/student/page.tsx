@@ -11,25 +11,31 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Clock, CalendarCheck, FileText, Percent, Info } from 'lucide-react';
+import { BookOpen, Clock, CalendarCheck, FileText, Percent, Info, Bell, TrendingUp, Users, Award, MessageSquare, Library, BarChart3 } from 'lucide-react';
 
 const currentCourses = [
-  { name: 'الرياضيات', teacher: 'أ. محمد عبدالله', grade: '92%', attendance: '98%' },
-  { name: 'العلوم', teacher: 'أ. فاطمة علي', grade: '88%', attendance: '95%' },
-  { name: 'التاريخ', teacher: 'أ. أحمد خالد', grade: '95%', attendance: '100%' },
-  { name: 'اللغة الإنجليزية', teacher: 'أ. سارة حسين', grade: '85%', attendance: '92%' },
+  { name: 'الرياضيات', teacher: 'أ. محمد عبدالله', grade: '94%', attendance: '100%' },
+  { name: 'العلوم', teacher: 'أ. فاطمة علي', grade: '91%', attendance: '98%' },
+  { name: 'التاريخ', teacher: 'أ. أحمد خالد', grade: '96%', attendance: '100%' },
+  { name: 'اللغة الإنجليزية', teacher: 'أ. سارة حسين', grade: '89%', attendance: '95%' },
+  { name: 'الفنون', teacher: 'أ. نورة سالم', grade: '97%', attendance: '100%' },
+  { name: 'التربية البدنية', teacher: 'أ. علي حسن', grade: '98%', attendance: '100%' },
 ];
 
 const upcomingAssignments = [
   { name: 'مقالة التاريخ', course: 'التاريخ', dueDate: '2024-08-15', status: 'قادم' },
   { name: 'واجب الرياضيات', course: 'الرياضيات', dueDate: '2024-08-18', status: 'قادم' },
   { name: 'مشروع العلوم', course: 'العلوم', dueDate: '2024-08-22', status: 'قادم' },
+  { name: 'عرض تقديمي بالإنجليزية', course: 'اللغة الإنجليزية', dueDate: '2024-08-20', status: 'قادم' },
+  { name: 'لوحة فنية', course: 'الفنون', dueDate: '2024-08-25', status: 'قادم' },
 ];
 
 const recentAnnouncements = [
     { title: 'تذكير بالامتحان النصفي', date: 'منذ يوم واحد', content: 'لا تنسوا الامتحان النصفي لمادة الرياضيات يوم الأربعاء القادم.'},
     { title: 'تغيير في الجدول الدراسي', date: 'منذ يومين', content: 'تم تبديل حصة الفنون بحصة التربية البدنية ليوم الخميس.'},
     { title: 'رحلة ميدانية قادمة', date: 'منذ 4 أيام', content: 'سيتم تنظيم رحلة إلى المتحف الوطني الأسبوع المقبل، سجل الآن!'},
+    { title: 'ورشة عمل جديدة', date: 'منذ أسبوع', content: 'ورشة عمل حول البرمجة والذكاء الاصطناعي للطلاب المتفوقين.'},
+    { title: 'تحديث النظام', date: 'منذ أسبوعين', content: 'تم تحديث نظام إدارة المدارس بميزات جديدة للطلاب.'},
 ];
 
 export default function StudentDashboard() {
@@ -51,7 +57,7 @@ export default function StudentDashboard() {
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4</div>
+            <div className="text-2xl font-bold">6</div>
             <p className="text-xs text-muted-foreground">مواد مسجلة للفصل الحالي</p>
           </CardContent>
         </Card>
@@ -61,7 +67,7 @@ export default function StudentDashboard() {
             <CalendarCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">96%</div>
+            <div className="text-2xl font-bold">98%</div>
             <p className="text-xs text-muted-foreground">حضور ممتاز هذا الشهر</p>
           </CardContent>
         </Card>
@@ -71,8 +77,8 @@ export default function StudentDashboard() {
             <Percent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">91.5%</div>
-            <p className="text-xs text-muted-foreground">تحسن بنسبة 1.2% عن الفصل الماضي</p>
+            <div className="text-2xl font-bold">94.2%</div>
+            <p className="text-xs text-muted-foreground">تحسن بنسبة 2.1% عن الفصل الماضي</p>
           </CardContent>
         </Card>
         <Card>
@@ -81,8 +87,52 @@ export default function StudentDashboard() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3</div>
+            <div className="text-2xl font-bold">5</div>
             <p className="text-xs text-muted-foreground">واجبات مستحقة هذا الأسبوع</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* إحصائيات إضافية */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">الرسائل الجديدة</CardTitle>
+            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">3</div>
+            <p className="text-xs text-muted-foreground">رسائل غير مقروءة</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">الامتحانات القادمة</CardTitle>
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">2</div>
+            <p className="text-xs text-muted-foreground">امتحانات هذا الأسبوع</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">الأنشطة المشاركة</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">4</div>
+            <p className="text-xs text-muted-foreground">أنشطة مسجلة هذا الشهر</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">الإنجازات</CardTitle>
+            <Award className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">8</div>
+            <p className="text-xs text-muted-foreground">شهادات وجوائز حصلت عليها</p>
           </CardContent>
         </Card>
       </div>

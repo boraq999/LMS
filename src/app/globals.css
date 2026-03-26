@@ -45,6 +45,11 @@ body {
     --super-admin-primary-foreground: 224 71% 4%;
     --super-admin-accent: 300 81% 60%;
     --super-admin-background: 220 20% 97%;
+
+    --finance-primary: 142 76% 36%;
+    --finance-primary-foreground: 355 7% 97%;
+    --finance-accent: 158 64% 52%;
+    --finance-background: 220 20% 97%;
   }
 
   .dark {
@@ -78,6 +83,8 @@ body {
     --sidebar-ring: var(--ring);
 
     --super-admin-background: 224 71% 4%;
+
+    --finance-background: 224 71% 4%;
   }
 }
 
@@ -93,8 +100,16 @@ body {
     background-color: #0d1117;
   }
 
+  .dark body.finance-body {
+    background-color: #0d1117;
+  }
+
   body.super-admin-body {
       background-color: var(--super-admin-background);
+  }
+
+  body.finance-body {
+      background-color: var(--finance-background);
   }
 }
 

@@ -6,13 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 interface User {
   username: string;
-  role: 'admin' | 'student' | 'teacher' | 'super-admin';
+  role: 'admin' | 'student' | 'teacher' | 'super-admin' | 'finance';
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin') => void;
+  login: (username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin' | 'finance') => void;
   logout: () => void;
 }
 
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = useCallback((username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin') => {
+  const login = useCallback((username: string, role: 'admin' | 'student' | 'teacher' | 'super-admin' | 'finance') => {
     const newUser: User = { username, role };
     setUser(newUser);
     localStorage.setItem('edumate-user', JSON.stringify(newUser));
@@ -50,6 +50,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.replace('/admin');
     } else if (role === 'super-admin') {
         router.replace('/super-admin');
+    } else if (role === 'finance') {
+        router.replace('/finance');
     }
   }, [router]);
 
@@ -70,6 +72,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.replace('/admin');
       } else if (user.role === 'super-admin') {
         router.replace('/super-admin');
+      } else if (user.role === 'finance') {
+        router.replace('/finance');
       }
     }
   }, [user, loading, pathname, router]);

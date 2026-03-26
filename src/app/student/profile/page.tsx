@@ -21,19 +21,34 @@ export default function StudentProfilePage() {
   const { user } = useAuth();
 
   const studentData = {
-    id: 'STU-001',
-    name: user?.username || 'طالب',
+    id: 'STU-002',
+    name: user?.username || 'الطالب_2',
     grade: 'الصف الخامس',
-    email: `${user?.username || 'student'}@example.com`,
-    phone: '123-456-7890',
-    address: '123 الشارع الرئيسي، طرابلس، ليبيا',
-    parentName: 'أحمد',
-    parentPhone: '091-234-5678',
+    class: '5-أ',
+    email: 'student2@school.edu',
+    phone: '091-234-5678',
+    address: 'شارع الجامعة، طرابلس، ليبيا',
+    parentName: 'محمد الطالب',
+    parentPhone: '092-345-6789',
+    parentEmail: 'parent@example.com',
+    emergencyContact: '093-456-7890',
+    birthDate: '2013-05-15',
+    enrollmentDate: '2024-09-01',
+    academicLevel: 'متفوق',
     healthInfo: {
-        bloodType: 'A+',
+        bloodType: 'B+',
         allergies: 'لا يوجد',
         chronicDiseases: 'لا يوجد',
-        healthStatus: 'جيدة'
+        healthStatus: 'ممتازة',
+        medications: 'لا يوجد',
+        doctorName: 'د. أحمد الصحة',
+        doctorPhone: '094-567-8901'
+    },
+    academicStats: {
+        averageGrade: 94.2,
+        attendanceRate: 98,
+        completedActivities: 12,
+        achievements: 8
     }
   };
 
